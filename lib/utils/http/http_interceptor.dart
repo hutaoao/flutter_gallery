@@ -16,9 +16,8 @@ class ErrorInterceptor extends Interceptor {
   /// 是否有网
   Future isConnected() async {
     final Connectivity connectivity = Connectivity();
-
-    /// ConnectivityResult.wifi
-    /// ConnectivityResult.none
+    /// ⚠️这里有一个坑：开了代理情况下返回结果会紊乱
+    /// ConnectivityResult.wifi/ConnectivityResult.mobile/ConnectivityResult.none ...
     var connectivityResult = await connectivity.checkConnectivity();
     return connectivityResult != ConnectivityResult.none;
   }
@@ -26,7 +25,6 @@ class ErrorInterceptor extends Interceptor {
   @override
   Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
     var isConnectedNetwork = await isConnected();
-    print(isConnectedNetwork);
     String message;
     switch (err.response?.statusCode) {
       case 400:
