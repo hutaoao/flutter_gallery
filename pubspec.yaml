@@ -1,0 +1,41 @@
+name: flutter_gallery
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+# 依赖
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.4.1 # 网络请求
+  get: ^4.6.6 # 状态管理 + 路由管理
+  cupertino_icons: ^1.0.6 # 苹果风格图标
+  flutter_screenutil: ^5.9.0 # 适应屏幕和字体大小
+  shared_preferences: ^2.2.2 # 本地存储
+  connectivity_plus: ^5.0.2 # 判断是否网络连接/可以区分蜂窝和WiFi连接
+
+# 开发依赖
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  # 图片配置
+  assets:
+    - images/image1.jpg
+    - images/2.0x/image1.jpg
+    - images/3.0x/image1.jpg
+
+  # 自体配置
+  fonts:
+    - family: AlibabaIcon
+      fonts:
+        - asset: fonts/iconfont.ttf
+

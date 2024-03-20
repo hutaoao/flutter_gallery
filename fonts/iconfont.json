@@ -1,0 +1,16 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "19449431",
+      "name": "语雀",
+      "font_class": "yuque-fill",
+      "unicode": "eab5",
+      "unicode_decimal": 60085
+    }
+  ]
+}
