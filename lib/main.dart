@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'utils/http/http_using.dart';
+import 'models/theme_model.dart';
+import 'models/user_model.dart';
 
 /// 自带路由配置
 // import './routers/routers_default.dart';
@@ -25,45 +29,52 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     /// 屏幕适配 flutter_screenutil
     // 填入设计稿中设备的屏幕尺寸,单位dpß
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        /// GetMaterialApp 替换为 MaterialApp
-        return MaterialApp.router(
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(
-              /// 统一appBar标题-居中 - android/ios表现形式不一样
-              centerTitle: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
+        ChangeNotifierProvider<ThemeModel>(create: (_) => ThemeModel()),
+      ],
+      child: ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          /// GetMaterialApp 替换为 MaterialApp
+          return MaterialApp.router(
+            theme: ThemeData(
+              brightness: Provider.of<ThemeModel>(context).isDarkMode ? Brightness.dark : Brightness.light,
+              appBarTheme: const AppBarTheme(
+                /// 统一appBar标题-居中 - android/ios表现形式不一样
+                centerTitle: true,
 
-              /// 统一appBar标题-颜色
-              foregroundColor: Colors.black,
+                /// 统一appBar标题-颜色
+                // foregroundColor: Colors.black,
 
-              /// 统一appBar标题-背景色
-              backgroundColor: Colors.black12,
+                /// 统一appBar标题-背景色
+                // backgroundColor: Colors.black12,
+              ),
+              // textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
             ),
-            // textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
-          ),
 
-          /// 隐藏右上角的debug标签
-          debugShowCheckedModeBanner: false,
+            /// 隐藏右上角的debug标签
+            debugShowCheckedModeBanner: false,
 
-          /// 自带路由配置
-          // onGenerateRoute: onGenerateRoute,
-          // 初始化路由
-          // initialRoute: RouterNames.login,
+            /// 自带路由配置
+            // onGenerateRoute: onGenerateRoute,
+            // 初始化路由
+            // initialRoute: RouterNames.login,
 
-          /// Getx配置 路由/状态管理
-          // 路由配置
-          // getPages: AppRouters.routers,
-          // 状态管理 - 全局绑定
-          // initialBinding: AllControllerBinding(),
+            /// Getx配置 路由/状态管理
+            // 路由配置
+            // getPages: AppRouters.routers,
+            // 状态管理 - 全局绑定
+            // initialBinding: AllControllerBinding(),
 
-          /// go_router 配置
-          routerConfig: AppRouters.routers,
-        );
-      },
+            /// go_router 配置
+            routerConfig: AppRouters.routers,
+          );
+        },
+      ),
     );
   }
 }
