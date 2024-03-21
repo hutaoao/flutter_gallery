@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'http_interceptor.dart';
 import '../storage/storage.dart';
+import 'http_config.dart';
 
-/// http_base.dart
 class HttpBase {
   final storage = Storage();
   static final HttpBase _instance = HttpBase._internal();
@@ -59,9 +59,9 @@ class HttpBase {
   /// [receiveTimeout] 接收超时赶时间
   /// [interceptors] 基础拦截器
   void init({
-    String? baseUrl = "https://hutaoao.cn",
-    Duration? connectTimeout = const Duration(milliseconds: 5000),
-    Duration? receiveTimeout = const Duration(milliseconds: 5000),
+    String? baseUrl = HttpConfig.baseURL,
+    Duration? connectTimeout = const Duration(milliseconds: HttpConfig.timeout),
+    Duration? receiveTimeout = const Duration(milliseconds: HttpConfig.timeout),
     Map<String, String>? headers,
     List<Interceptor>? interceptors,
   }) {
@@ -77,8 +77,8 @@ class HttpBase {
     }
   }
 
-  // 添加认证
-  // 读取本地配置
+  /// 添加认证
+  /// 读取本地配置
   Map<String, dynamic>? _getAuthorizationHeader() {
     Map<String, dynamic>? headers;
     // 获取本地token

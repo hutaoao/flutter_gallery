@@ -1,5 +1,5 @@
 name: flutter_gallery
-description: "A new Flutter project."
+description: "致力打造全组件（含路由、状态管理、请求等）demo"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1

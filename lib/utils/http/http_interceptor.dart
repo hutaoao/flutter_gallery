@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
+/// 实现拦截器类
+///
 class NetCacheInterceptor extends Interceptor {}
 
 class RequestInterceptor extends Interceptor {

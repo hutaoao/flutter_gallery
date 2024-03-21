@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'http_base.dart';
 
+/// 封装具体使用类
+///
 class Fetch {
   static void init({
     List<Interceptor>? interceptors,
