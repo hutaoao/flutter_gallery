@@ -1,11 +1,14 @@
+/// 默认的路由配置
+library;
+
 import 'package:flutter/cupertino.dart';
 
 /// layout
-import '../pages/layout/layout.dart';
+import '../../pages/layout/layout.dart';
 
 /// 登录注册
-import '../pages/login/login.dart';
-import '../pages/login/register.dart';
+import '../../pages/login/login.dart';
+import '../../pages/login/register.dart';
 
 /// 1、配置路由 可做权限配置
 final Map routes = {

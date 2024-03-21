@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'utils/http/http_using.dart';
 
@@ -7,8 +7,9 @@ import 'utils/http/http_using.dart';
 // import './routers/routers_default.dart';
 
 /// Get路由配置
+// import './binding/binding.dart';
+
 import './routers/routers.dart';
-import './binding/binding.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,18 +31,17 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         /// GetMaterialApp 替换为 MaterialApp
-        return GetMaterialApp(
+        return MaterialApp.router(
           theme: ThemeData(
             appBarTheme: const AppBarTheme(
+              /// 统一appBar标题-居中 - android/ios表现形式不一样
               centerTitle: true,
 
-              /// 统一appBar标题-居中 - android/ios表现形式不一样
+              /// 统一appBar标题-颜色
               foregroundColor: Colors.black,
 
-              /// 统一appBar标题-颜色
-              backgroundColor: Colors.black12,
-
               /// 统一appBar标题-背景色
+              backgroundColor: Colors.black12,
             ),
             // textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
           ),
@@ -49,18 +49,19 @@ class MyApp extends StatelessWidget {
           /// 隐藏右上角的debug标签
           debugShowCheckedModeBanner: false,
 
-          /// 初始化路由
-          initialRoute: RouterNames.login,
-
           /// 自带路由配置
           // onGenerateRoute: onGenerateRoute,
+          // 初始化路由
+          // initialRoute: RouterNames.login,
+
           /// Getx配置 路由/状态管理
-          getPages: AppRouters.routers,
+          // 路由配置
+          // getPages: AppRouters.routers,
+          // 状态管理 - 全局绑定
+          // initialBinding: AllControllerBinding(),
 
-          /// 路由配置
-          initialBinding: AllControllerBinding(),
-
-          /// 状态管理 - 全局绑定
+          /// go_router 配置
+          routerConfig: AppRouters.routers,
         );
       },
     );

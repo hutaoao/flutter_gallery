@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/storage/storage.dart';
+import 'package:go_router/go_router.dart';
 
 /// StatelessWidget 无状态组件
 class HomeWidget extends StatelessWidget {
@@ -21,7 +22,8 @@ class HomeWidget extends StatelessWidget {
         color: Colors.red,
         child: ElevatedButton(
           onPressed: () {
-            storage.setStorage('age', 20);
+            context.push('/login');
+            // storage.setStorage('age', 20);
           },
           child: const Text('存储'),
         ),

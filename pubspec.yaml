@@ -12,7 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^5.4.1 # 网络请求
-  get: ^4.6.6 # 状态管理 + 路由管理
+  get: ^4.6.6 # 状态管理 + 路由管理（新手不建议 忽略了很多flutter原始方法）
+  provider: ^6.1.2 # 状态管理
+  go_router: ^13.2.1 # 路由管理
   cupertino_icons: ^1.0.6 # 苹果风格图标
   flutter_screenutil: ^5.9.0 # 适应屏幕和字体大小
   shared_preferences: ^2.2.2 # 本地存储

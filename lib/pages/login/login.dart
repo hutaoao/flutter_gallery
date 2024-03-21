@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gallery/utils/http/http_using.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:go_router/go_router.dart';
 
 /// 登录
 class LoginWidget extends StatefulWidget {
@@ -22,7 +22,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     super.initState();
   }
 
-  void _submitForm() async {
+  void _submitForm(BuildContext context) async {
     final form = _formKey.currentState;
 
     if (form!.validate()) {
@@ -32,15 +32,19 @@ class _LoginWidgetState extends State<LoginWidget> {
       // 如果登录成功，可以导航到另一个屏幕
       // 如果登录失败，可以显示一个错误消息
 
-      var resp = await Fetch.get("/apis/login", params: {"username": "yy", "password": "qwer1234"});
-      print(resp);
       print('Username: ${_usernameController.text}, Password: ${_passwordController.text}');
+      var resp = await Fetch.post("/apis/login", data: {"username": _usernameController.text, "password": _passwordController.text});
+      print(resp);
+      context.go('/');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('登录'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -73,7 +77,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   width: 1.sw,
                   margin: EdgeInsets.only(top: 30.w),
                   child: ElevatedButton(
-                    onPressed: _submitForm,
+                    onPressed: () => _submitForm(context),
                     child: const Text('Login'),
                   ),
                 )
