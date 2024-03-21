@@ -5,7 +5,7 @@ import 'http_config.dart';
 
 class HttpBase {
   final storage = Storage();
-  static final HttpBase _instance = HttpBase._internal();
+  static final HttpBase _instance = HttpBase._internal(); // 内部使用的标识符或变量
 
   // 单例模式使用Request类，
   factory HttpBase() => _instance;
@@ -19,14 +19,10 @@ class HttpBase {
 
     dio = Dio(options);
 
-    /// 添加request拦截器
-    dio.interceptors.add(RequestInterceptor());
+    /// 添加拦截器 onRequest/onResponse/onError 等
+    dio.interceptors.add(DioInterceptors());
 
-    /// 添加error拦截器
-    dio.interceptors.add(ErrorInterceptor());
-
-    /// 添加cache拦截器
-    dio.interceptors.add(NetCacheInterceptor());
+    /// 这里还可以添加 添加转换器/添加cookie管理器/刷新token拦截器(lock/unlock)
 
     /// 添加retry拦截器
     // dio.interceptors.add(
@@ -90,24 +86,29 @@ class HttpBase {
     return headers;
   }
 
-  Future request(
-    String path, {
-    required String method,
+  /// 取消请求token
+  final CancelToken _cancelToken = CancelToken();
+
+  /// 请求类
+  Future request(String path, {
+    String method = 'get',
     Map? data,
     Map<String, dynamic>? params,
     Options? options,
     CancelToken? cancelToken,
-    bool refresh = false,
-    // bool noCache = !CACHE_ENABLE,
-    String? cacheKey,
-    bool cacheDisk = false,
+    bool? refresh = false, // 当请求返回401或403状态码（表示未授权或无权限访问资源）时，刷新token并重新发起请求的一种机制
+    bool? noCache = false, // 禁止某些请求被缓存 - noCache设置为true时，这个请求将不会被缓存
+    String? cacheKey, // 指定缓存策略的键（key）- 通过cacheKey来标识这个请求结果
+    bool? cacheDisk = false, // 使用磁盘缓存，将网络请求的响应数据持久化到设备的磁盘上 - 通常与CacheInterceptor一起使用
+    ProgressCallback? onSendProgress, // 跟踪上传进度
+    ProgressCallback? onReceiveProgress, // 跟踪下载进度
   }) async {
     Options requestOptions = options ?? Options();
     requestOptions = requestOptions.copyWith(
       method: method,
       extra: {
         "refresh": refresh,
-        // "noCache": noCache,
+        "noCache": noCache,
         "cacheKey": cacheKey,
         "cacheDisk": cacheDisk,
       },
@@ -122,7 +123,9 @@ class HttpBase {
       data: data,
       queryParameters: params,
       options: requestOptions,
-      // cancelToken: cancelToken ?? _cancelToken,
+      cancelToken: cancelToken ?? _cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress
     );
 
     return response.data;

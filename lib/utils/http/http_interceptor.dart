@@ -1,27 +1,34 @@
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 /// 实现拦截器类
-///
-class NetCacheInterceptor extends Interceptor {}
-
-class RequestInterceptor extends Interceptor {
+class DioInterceptors extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     // TODO: implement onRequest
+    // 例如你要：对非open的接口的请求参数全部增加userId
+    // if (!options.path.contains("open")) {
+    //   options.queryParameters["userId"] = "xxx";
+    // }
+
+    // 头部添加token
+    // options.headers["token"] = "xxx";
+
+    // 更多业务需求...
+
+    // handler.next(options);
     super.onRequest(options, handler);
   }
-}
 
-class ErrorInterceptor extends Interceptor {
-  /// 是否有网
-  Future isConnected() async {
-    final Connectivity connectivity = Connectivity();
-    /// ⚠️这里有一个坑：开了代理情况下返回结果会紊乱
-    /// ConnectivityResult.wifi/ConnectivityResult.mobile/ConnectivityResult.none ...
-    var connectivityResult = await connectivity.checkConnectivity();
-    return connectivityResult != ConnectivityResult.none;
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) async {
+    /// 这里你可以做
+    // 请求成功是对数据做基本处理
+    // 对某些单独的url返回数据做特殊处理
+    // 根据公司的业务需求进行定制化处理
+
+    // handler.next(response);
+    super.onResponse(response, handler);
   }
 
   @override
@@ -70,8 +77,18 @@ class ErrorInterceptor extends Interceptor {
         message = '请求失败，错误码：${err.response?.statusCode}';
         break;
     }
-    Get.snackbar('提示', message);
+    print(message);
 
-    return super.onError(err, handler);
+    super.onError(err, handler);
+  }
+
+  /// 是否有网
+  Future isConnected() async {
+    final Connectivity connectivity = Connectivity();
+
+    /// ⚠️这里有一个坑：开了代理情况下返回结果会紊乱
+    /// ConnectivityResult.wifi/ConnectivityResult.mobile/ConnectivityResult.none ...
+    var connectivityResult = await connectivity.checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
   }
 }
