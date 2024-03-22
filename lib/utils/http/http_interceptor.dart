@@ -1,18 +1,20 @@
 import 'package:dio/dio.dart';
+import '../storage/storage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 /// 实现拦截器类
 class DioInterceptors extends Interceptor {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async{
     // TODO: implement onRequest
     // 例如你要：对非open的接口的请求参数全部增加userId
     // if (!options.path.contains("open")) {
     //   options.queryParameters["userId"] = "xxx";
     // }
-
+    final storage = Storage();
     // 头部添加token
-    // options.headers["token"] = "xxx";
+    final token = await storage.getStorage('token');
+    options.headers['Token'] = token;
 
     // 更多业务需求...
 

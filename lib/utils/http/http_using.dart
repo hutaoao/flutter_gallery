@@ -18,6 +18,7 @@ class Fetch {
 
   static Future get(
     String path, {
+    Map? data,
     Map<String, dynamic>? params,
     Options? options,
     CancelToken? cancelToken,
@@ -28,6 +29,7 @@ class Fetch {
     return await HttpBase().request(
       path,
       method: "GET",
+      data: data,
       params: params,
       options: options,
       cancelToken: cancelToken,
@@ -38,7 +40,7 @@ class Fetch {
 
   static Future post(
     String path, {
-    data,
+    Map? data,
     Map<String, dynamic>? params,
     Options? options,
     CancelToken? cancelToken,
@@ -55,7 +57,7 @@ class Fetch {
 
   static Future put(
     String path, {
-    data,
+    Map? data,
     Map<String, dynamic>? params,
     Options? options,
     CancelToken? cancelToken,
@@ -72,7 +74,7 @@ class Fetch {
 
   static Future delete(
     String path, {
-    data,
+    Map? data,a,
     Map<String, dynamic>? params,
     Options? options,
     CancelToken? cancelToken,

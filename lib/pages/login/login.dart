@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gallery/utils/http/http_using.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gallery/apis/user.dart';
+import 'package:flutter_gallery/utils/storage/storage.dart';
 import 'package:go_router/go_router.dart';
 
 /// 登录
@@ -12,6 +13,7 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
+  final storage = Storage();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -33,8 +35,10 @@ class _LoginWidgetState extends State<LoginWidget> {
       // 如果登录失败，可以显示一个错误消息
 
       print('Username: ${_usernameController.text}, Password: ${_passwordController.text}');
-      var resp = await Fetch.post("/apis/login", data: {"username": _usernameController.text, "password": _passwordController.text});
-      print(resp);
+      var resp = await UserApi.login({"username": _usernameController.text, "password": _passwordController.text});
+      print(resp['data']);
+      String token = resp['data']['token'];
+      await storage.setStorage('token', token);
       context.go('/');
     }
   }

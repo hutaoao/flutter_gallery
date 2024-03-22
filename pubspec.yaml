@@ -31,13 +31,13 @@ flutter:
 
   # 图片配置
   assets:
-    - images/image1.jpg
-    - images/2.0x/image1.jpg
-    - images/3.0x/image1.jpg
+    - assets/images/image1.jpg
+    - assets/images/2.0x/image1.jpg
+    - assets/images/3.0x/image1.jpg
 
   # 自体配置
   fonts:
     - family: AlibabaIcon
       fonts:
-        - asset: fonts/iconfont.ttf
+        - asset: assets/fonts/iconfont.ttf
 

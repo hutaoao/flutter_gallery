@@ -4,8 +4,8 @@ import '../storage/storage.dart';
 import 'http_config.dart';
 
 class HttpBase {
-  final storage = Storage();
-  static final HttpBase _instance = HttpBase._internal(); // 内部使用的标识符或变量
+  static final storage = Storage();
+  static final HttpBase _instance = HttpBase._internal(); // 通用全局单例，第一次使用时初始化。
 
   // 单例模式使用Request类，
   factory HttpBase() => _instance;
@@ -73,19 +73,6 @@ class HttpBase {
     }
   }
 
-  /// 添加认证
-  /// 读取本地配置
-  Map<String, dynamic>? _getAuthorizationHeader() {
-    Map<String, dynamic>? headers;
-    // 获取本地token
-    storage.getStorage('token').then((value) {
-      headers = {
-        "your token name": value,
-      };
-    });
-    return headers;
-  }
-
   /// 取消请求token
   final CancelToken _cancelToken = CancelToken();
 
@@ -113,10 +100,7 @@ class HttpBase {
         "cacheDisk": cacheDisk,
       },
     );
-    Map<String, dynamic>? authorization = _getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: authorization);
-    }
+
     Response response;
     response = await dio.request(
       path,

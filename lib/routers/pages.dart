@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gallery/utils/storage/storage.dart';
 
 import 'names.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +13,7 @@ import '../pages/login/register.dart';
 
 class AppRouters {
   static final GoRouter routers = GoRouter(
-    initialLocation: RouterNames.login,
+    initialLocation: RouterNames.init,
     routes: <RouteBase>[
       GoRoute(
         path: RouterNames.init,
@@ -28,9 +29,12 @@ class AppRouters {
       ),
     ],
     /// 路由重定向
-    redirect: (BuildContext context, GoRouterState state) {
+    redirect: (BuildContext context, GoRouterState state) async {
+      final storage = Storage();
+      final token = await storage.getStorage('token');
+
       // 如果用户未登录，则需要登录
-      const loggedIn = true;
+      final loggedIn = token != null;
       final loggingIn = state.fullPath == '/login';
       if (!loggedIn) return loggingIn ? null : '/login';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../assets/alibaba_fonts.dart';
+import 'package:flutter_gallery/utils/font/alibaba_fount.dart';
 import 'home.dart';
 import 'about.dart';
 import 'component.dart';
@@ -20,10 +20,10 @@ class _LayoutWidgetState extends State<LayoutWidget> {
 
   final List _pages = [
     HomeWidget(),
-    YuQueWidget(),
-    PublishWidget(),
-    ComponentWidget(),
-    AboutWidget(),
+    const YuQueWidget(),
+    const PublishWidget(),
+    const ComponentWidget(),
+    const AboutWidget(),
   ];
 
   @override

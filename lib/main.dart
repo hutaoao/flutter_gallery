@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'utils/http/http_using.dart';
-import 'models/theme_model.dart';
-import 'models/user_model.dart';
+import 'provider/theme_model.dart';
+import 'provider/user_model.dart';
 
 /// 自带路由配置
 // import './routers/routers_default.dart';
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          /// GetMaterialApp 替换为 MaterialApp
+          /// 使用 Get 时：GetMaterialApp 替换为 MaterialApp
           return MaterialApp.router(
             theme: ThemeData(
               brightness: Provider.of<ThemeModel>(context).isDarkMode ? Brightness.dark : Brightness.light,
