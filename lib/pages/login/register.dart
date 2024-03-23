@@ -11,6 +11,11 @@ class RegisterWidget extends StatefulWidget {
 class _RegisterWidgetState extends State<RegisterWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Text('demo');
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('register'),
+      ),
+      body: const Text('register'),
+    );
   }
 }

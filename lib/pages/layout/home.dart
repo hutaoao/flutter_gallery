@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gallery/models/user_model.dart';
-import 'package:flutter_gallery/models/theme_model.dart';
+import 'package:flutter_gallery/provider/user_model.dart';
+import 'package:flutter_gallery/provider/theme_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../utils/storage/storage.dart';
@@ -30,7 +30,7 @@ class HomeWidget extends StatelessWidget {
                 return ElevatedButton(
                   onPressed: () {
                     // context.push('/login');
-                    // storage.setStorage('age', 20);
+                    storage.removeStorage('token');
                     themeModel.toggleTheme();
                     userModel.add();
                   },

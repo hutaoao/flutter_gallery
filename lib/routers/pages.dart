@@ -44,5 +44,42 @@ class AppRouters {
       // 不需要重定向
       return null;
     },
+    /// 路由监听
+    // 有些时候,我们需要知道当前路由,跳转前的路由,或者是监听这个路由栈的变化
+    // 这时候,我们就需要有一个路由的监听
+    // 我们可以自己实现一个NavigatorObserver,并重写相关生命周期的方法:
+    observers: [
+      GoRouterObserver()
+    ]
   );
 }
+
+class GoRouterObserver extends NavigatorObserver {
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    print('MyTest didPush: $route');
+  }
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    print('MyTest didPop: $route');
+  }
+  @override
+  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    print('MyTest didRemove: $route');
+  }
+  @override
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
+    print('MyTest didReplace: $newRoute');
+  }
+  @override
+  void didStartUserGesture(Route route, Route? previousRoute) {
+    // TODO: implement didStartUserGesture
+    super.didStartUserGesture(route, previousRoute);
+  }
+  @override
+  void didStopUserGesture() {
+    // TODO: implement didStopUserGesture
+    super.didStopUserGesture();
+  }
+}
+

@@ -1,33 +1,42 @@
 import 'package:dio/dio.dart';
+import '../../routers/pages.dart';
 import '../storage/storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter_gallery/routers/routers.dart';
 
 /// 实现拦截器类
 class DioInterceptors extends Interceptor {
+  final storage = Storage();
+  final GoRouter router = AppRouters.routers;
+
+  /// 请求拦截
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async{
     // TODO: implement onRequest
-    // 例如你要：对非open的接口的请求参数全部增加userId
-    // if (!options.path.contains("open")) {
-    //   options.queryParameters["userId"] = "xxx";
-    // }
-    final storage = Storage();
     // 头部添加token
     final token = await storage.getStorage('token');
     options.headers['Token'] = token;
 
     // 更多业务需求...
-
     // handler.next(options);
     super.onRequest(options, handler);
   }
 
+  /// 响应拦截
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
     /// 这里你可以做
     // 请求成功是对数据做基本处理
     // 对某些单独的url返回数据做特殊处理
     // 根据公司的业务需求进行定制化处理
+    var responseCode = response.data['code'];
+    // { msg: 'token过期，请重新登录！', code: 10008 }
+    // { msg: 'token无效，请重新登录！', code: 10009 }
+    if (responseCode == 10008 || responseCode == 10009) {
+      await storage.clear();
+      router.push('/login');
+    }
 
     // handler.next(response);
     super.onResponse(response, handler);
