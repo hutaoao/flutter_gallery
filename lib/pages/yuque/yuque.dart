@@ -34,12 +34,20 @@ class _YuQueWidgetState extends State<YuQueWidget> {
   // 获取数据
   Future getData() async {
     Map params = {'current': _pageNum, 'pageSize': 10};
-    _isLoading = true;
-    var resp = await UserApi.getYuQueDocs(params);
-    _isLoading = false;
-    _total = resp['data']['total'];
-    dataList.addAll(resp['data']['list']);
-    return dataList;
+    try{
+      _isLoading = true;
+      var resp = await UserApi.getYuQueDocs(params);
+      if (resp['code'] != 10000) {
+        return [];
+      }
+      _isLoading = false;
+      _total = resp['data']['total'];
+      dataList.addAll(resp['data']['list']);
+      return dataList;
+    }catch(err) {
+      print(err);
+      return [];
+    }
   }
 
   // 下拉刷新

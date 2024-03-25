@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gallery/globals/globals.dart' as globals;
 
 import 'utils/http/http_using.dart';
 import 'provider/theme_model.dart';
@@ -14,6 +15,7 @@ import 'provider/user_model.dart';
 // import './binding/binding.dart';
 
 import './routers/routers.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -72,6 +74,8 @@ class MyApp extends StatelessWidget {
 
             /// go_router 配置
             routerConfig: AppRouters.routers,
+
+            scaffoldMessengerKey: globals.scaffoldMessengerKey,
           );
         },
       ),

@@ -4,7 +4,7 @@ import '../storage/storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_gallery/routers/routers.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_gallery/widgets/my_snackbar/my_snackbar.dart';
 
 /// 实现拦截器类
 class DioInterceptors extends Interceptor {
@@ -35,7 +35,7 @@ class DioInterceptors extends Interceptor {
     // { msg: 'token过期，请重新登录！', code: 10008 }
     // { msg: 'token无效，请重新登录！', code: 10009 }
     if (responseCode == 10008 || responseCode == 10009) {
-      Fluttertoast.showToast(msg: 'token过期，请重新登录', gravity: ToastGravity.CENTER);
+      const MySnackbar(message: 'token失效，请重新登录 ').showSnackBar();
       await storage.clear();
       router.push('/login');
     }
@@ -90,7 +90,7 @@ class DioInterceptors extends Interceptor {
         message = '请求失败，错误码：${err.response?.statusCode}';
         break;
     }
-    Fluttertoast.showToast(msg: message, gravity: ToastGravity.CENTER);
+    MySnackbar(message: message).showSnackBar();
 
     super.onError(err, handler);
   }
