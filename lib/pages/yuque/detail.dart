@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -17,9 +18,8 @@ class _YuQueDetailWidgetState extends State<YuQueDetailWidget> {
   @override
   void initState() {
     super.initState();
-    // TODO: implement initState
+    // 初始化Webview
     initWebview();
-    print(widget.slug);
   }
 
   initWebview() {
@@ -57,7 +57,14 @@ class _YuQueDetailWidgetState extends State<YuQueDetailWidget> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-        child: completed ? WebViewWidget(controller: controller) : const Text('加载中'),
+        child: completed
+            ? WebViewWidget(controller: controller)
+            : const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [CircularProgressIndicator(), SizedBox(height: 10), Text('加载中，请稍后')],
+                ),
+              ),
       ),
     );
   }
