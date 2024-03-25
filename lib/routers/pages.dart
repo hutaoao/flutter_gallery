@@ -11,6 +11,9 @@ import '../pages/layout/layout.dart';
 import '../pages/login/login.dart';
 import '../pages/login/register.dart';
 
+/// 语雀详情页
+import '../pages/yuque/detail.dart';
+
 class AppRouters {
   static final GoRouter routers = GoRouter(
     initialLocation: RouterNames.init,
@@ -18,6 +21,15 @@ class AppRouters {
       GoRoute(
         path: RouterNames.init,
         builder: (context, state) => const LayoutWidget(),
+        routes: <RouteBase>[
+          GoRoute(
+            path: RouterNames.yuQueDetail,
+            builder: (context, state) {
+              final String? slug = state.pathParameters['slug'];
+              return YuQueDetailWidget(slug: slug);
+            },
+          )
+        ],
       ),
       GoRoute(
         path: RouterNames.login,

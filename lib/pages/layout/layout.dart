@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gallery/utils/font/alibaba_fount.dart';
-import 'home.dart';
-import 'about.dart';
-import 'component.dart';
-import 'publish.dart';
-import 'yuque.dart';
+import '../home/home.dart';
+import '../about/about.dart';
+import '../component/component.dart';
+import '../publish/publish.dart';
+import '../yuque/yuque.dart';
 
 class LayoutWidget extends StatefulWidget {
   final int index;

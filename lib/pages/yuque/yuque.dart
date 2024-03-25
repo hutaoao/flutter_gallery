@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gallery/apis/user.dart';
+import 'package:go_router/go_router.dart';
 
 /// 语雀
 class YuQueWidget extends StatefulWidget {
@@ -33,16 +34,24 @@ class _YuQueWidgetState extends State<YuQueWidget> {
       appBar: AppBar(
         title: const Text('data'),
       ),
-      body: Center(
-        child: FutureBuilder(
-          future: getDatas(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Text('加载中');
-            }
-            return const Text('加载完毕');
-          },
-        ),
+      body: Column(
+        children: [
+          FutureBuilder(
+            future: getDatas(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Text('加载中');
+              }
+              return const Text('加载完毕');
+            },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              context.push('/yuque-detail/hok4og');
+            },
+            child: const Text('详情页'),
+          )
+        ],
       ),
     );
   }
