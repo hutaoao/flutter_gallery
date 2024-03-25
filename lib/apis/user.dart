@@ -10,9 +10,4 @@ class UserApi {
   static Future getYuQueDocs(params) async{
     return await Fetch.get('/apis/get-yuque-docs', data: params);
   }
-
-  // 获取标签
-  static Future getTags(params) async{
-    return await Fetch.get('/apis/admin/get-tags', data: params);
-  }
 }

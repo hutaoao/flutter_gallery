@@ -68,20 +68,23 @@ class AppRouters {
 
 class GoRouterObserver extends NavigatorObserver {
   @override
-  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    print('MyTest didPush: $route');
+  void didPush(Route route, Route? previousRoute) {
+    // TODO: implement didPush
+    super.didPush(route, previousRoute);
   }
   @override
-  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    print('MyTest didPop: $route');
+  void didPop(Route route, Route? previousRoute) {
+    // TODO: implement didPop
+    super.didPop(route, previousRoute);
   }
   @override
-  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    print('MyTest didRemove: $route');
+  void didRemove(Route route, Route? previousRoute) {
+    // TODO: implement didRemove
+    super.didRemove(route, previousRoute);
   }
   @override
   void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
-    print('MyTest didReplace: $newRoute');
+    // print('MyTest didReplace: $newRoute');
   }
   @override
   void didStartUserGesture(Route route, Route? previousRoute) {

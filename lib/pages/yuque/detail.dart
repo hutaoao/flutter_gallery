@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -38,7 +37,6 @@ class _YuQueDetailWidgetState extends State<YuQueDetailWidget> {
           },
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            print('onNavigationRequest$request');
             if (request.url.startsWith('https://www.youtube.com/')) {
               return NavigationDecision.prevent;
             }
@@ -62,7 +60,7 @@ class _YuQueDetailWidgetState extends State<YuQueDetailWidget> {
             : const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [CircularProgressIndicator(), SizedBox(height: 10), Text('加载中，请稍后')],
+                  children: [CircularProgressIndicator(), SizedBox(height: 10), Text('加载中，请稍候')],
                 ),
               ),
       ),
