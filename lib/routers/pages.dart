@@ -13,6 +13,9 @@ import '../pages/login/register.dart';
 
 /// 语雀详情页
 import '../pages/yuque/detail.dart';
+/// 组件详情页
+import '../pages/component/detail.dart';
+import 'package:flutter_gallery/models/component_model.dart';
 
 class AppRouters {
   static final GoRouter routers = GoRouter(
@@ -27,6 +30,14 @@ class AppRouters {
             builder: (context, state) {
               final String? slug = state.pathParameters['slug'];
               return YuQueDetailWidget(slug: slug);
+            },
+          ),
+          GoRoute(
+            path: RouterNames.widgetDetail,
+            builder: (context, GoRouterState state) {
+              print(state.extra);
+              final extraData = state.extra as ComponentModel;
+              return ComponentDetail(extraData: extraData);
             },
           )
         ],

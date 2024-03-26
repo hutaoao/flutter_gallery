@@ -6,4 +6,6 @@
   static const register = '/register';
   /// 语雀详情页
   static const yuQueDetail = 'yuque-detail/:slug';
+  /// 组件详情页
+  static const widgetDetail = 'widget-detail';
  }
