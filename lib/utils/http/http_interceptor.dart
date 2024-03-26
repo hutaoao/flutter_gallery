@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import '../../routers/pages.dart';
 import '../storage/storage.dart';
@@ -35,9 +37,11 @@ class DioInterceptors extends Interceptor {
     // { msg: 'token过期，请重新登录！', code: 10008 }
     // { msg: 'token无效，请重新登录！', code: 10009 }
     if (responseCode == 10008 || responseCode == 10009) {
-      const MySnackbar(message: 'token失效，请重新登录 ').showSnackBar();
+      MySnackbar.error(message: 'token失效，即将跳转登录');
       await storage.clear();
-      router.push('/login');
+      Timer(const Duration(seconds: 2), () {
+        router.push('/login');
+      });
     }
 
     // handler.next(response);
@@ -90,7 +94,7 @@ class DioInterceptors extends Interceptor {
         message = '请求失败，错误码：${err.response?.statusCode}';
         break;
     }
-    MySnackbar(message: message).showSnackBar();
+    MySnackbar.error(message: message);
 
     super.onError(err, handler);
   }

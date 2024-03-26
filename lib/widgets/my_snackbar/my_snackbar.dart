@@ -2,18 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gallery/globals/globals.dart' as globals;
 
 class MySnackbar extends StatelessWidget {
-  final String message;
-  final SnackBarAction? action;
-
-  const MySnackbar({super.key, required this.message, this.action});
+  const MySnackbar({super.key});
 
   /// 显示
-  void showSnackBar() {
+  static void success({required String message, SnackBarAction? action}) {
     globals.scaffoldMessengerKey.currentState!.showSnackBar(
       SnackBar(
         content: Text(message),
         action: action,
         duration: const Duration(seconds: 2), // 设置 SnackBar 显示的时间
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  static void info({required String message, SnackBarAction? action}) {
+    globals.scaffoldMessengerKey.currentState!.showSnackBar(
+      SnackBar(
+        content: Text(message),
+        action: action,
+        duration: const Duration(seconds: 2), // 设置 SnackBar 显示的时间
+        backgroundColor: Colors.grey,
+      ),
+    );
+  }
+
+  static void error({required String message, SnackBarAction? action}) {
+    globals.scaffoldMessengerKey.currentState!.showSnackBar(
+      SnackBar(
+        content: Text(message),
+        action: action,
+        duration: const Duration(seconds: 2), // 设置 SnackBar 显示的时间
+        backgroundColor: Colors.red,
       ),
     );
   }
