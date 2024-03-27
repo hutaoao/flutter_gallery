@@ -18,6 +18,7 @@ dependencies:
   fluttertoast: ^8.2.4 # 轻提示
   webview_flutter: ^4.7.0 # webview
   cupertino_icons: ^1.0.6 # 苹果风格图标
+  flutter_highlight: ^0.7.0 # 代码高亮
   flutter_screenutil: ^5.9.0 # 适应屏幕和字体大小
   shared_preferences: ^2.2.2 # 本地存储
   connectivity_plus: ^5.0.2 # 判断是否网络连接/可以区分蜂窝和WiFi连接
@@ -36,6 +37,9 @@ flutter:
     - assets/images/image1.jpg
     - assets/images/2.0x/image1.jpg
     - assets/images/3.0x/image1.jpg
+    - lib/pages/component/widgets/StatelessWidget/
+    - lib/pages/component/widgets/StatefulWidget/
+
 
   # 自体配置
   fonts:

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gallery/models/component_model.dart';
 import 'widgets/widgets.dart';
+import 'package:flutter_gallery/models/component_model.dart';
+import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/atelier-cave-light.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class ComponentDetail extends StatefulWidget {
   final ComponentModel extraData;
@@ -12,13 +15,137 @@ class ComponentDetail extends StatefulWidget {
 }
 
 class _ComponentDetailState extends State<ComponentDetail> {
+  List<Map> dataList = [];
+
+  Future<String> _readDartFile(String fileName) async {
+    String fileText = await rootBundle.loadString('lib/pages/component/widgets/${widget.extraData.catalogue}/$fileName.dart');
+    return fileText;
+  }
+
+  _showCode(int i, String fileName, bool v) async {
+    if (dataList[i]['content'] != '') {
+      setState(() {
+        dataList[i]['show'] = !dataList[i]['show'];
+      });
+      return;
+    }
+    print('----');
+    String fileText = await rootBundle.loadString('lib/pages/component/widgets/${widget.extraData.catalogue}/$fileName.dart');
+    setState(() {
+      dataList[i]['show'] = true;
+      dataList[i]['content'] = fileText;
+    });
+  }
+
+  List<Widget> _renderChild() {
+    List<Widget> list = [];
+    List<Map> data = WidgetsMap.map(widget.extraData.widgetName);
+
+    for (int index = 0; index < data.length; index++) {
+      dataList.add({'show': false, 'content': ''});
+      list.add(Card(
+        color: Colors.white,
+        child: Column(
+          children: [
+            ListTile(
+              title: Text('⚡${data[index]['title']}'),
+              trailing: RotatableIcon(handleClick: (bool v) => _showCode(index, data[index]['filename'], v)),
+            ),
+            data[index]['widget'],
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(top: 15),
+              child: dataList[index]['show']
+                  ? HighlightView(
+                      // The original code to be highlighted
+                      dataList[index]['content'],
+
+                      // Specify language
+                      // It is recommended to give it a value for performance
+                      language: 'dart',
+
+                      // Specify highlight theme
+                      // All available themes are listed in `themes` folder
+                      theme: atelierCaveLightTheme,
+
+                      // Specify padding
+                      padding: const EdgeInsets.all(16),
+
+                      // Specify text style
+                      textStyle: const TextStyle(
+                        fontSize: 12,
+                      ),
+                    )
+                  : const SizedBox(),
+            )
+          ],
+        ),
+      ));
+    }
+
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.extraData.widgetName),
       ),
-      body: WidgetsMap.map(widget.extraData.widgetName),
+      body: ListView(
+        children: _renderChild(),
+      ),
+    );
+  }
+}
+
+/// 能旋转的Icon组件
+class RotatableIcon extends StatefulWidget {
+  final Function? handleClick;
+
+  const RotatableIcon({super.key, this.handleClick});
+
+  @override
+  State<StatefulWidget> createState() => _RotatableIconState();
+}
+
+class _RotatableIconState extends State<RotatableIcon> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  bool isRotate = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _rotateIcon() {
+    if (_controller.isDismissed) {
+      _controller.animateTo(0.25);
+    } else {
+      _controller.reverse();
+    }
+    isRotate = !isRotate;
+    widget.handleClick!(isRotate);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _rotateIcon,
+      child: RotationTransition(
+        turns: _controller,
+        child: const Icon(Icons.code),
+      ),
     );
   }
 }

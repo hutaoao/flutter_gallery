@@ -8,37 +8,44 @@ import 'exp/stateful_unit.dart';
 import 'exp/stateless_unit.dart';
 
 class WidgetsMap {
-  static Widget map(String name) {
+  static List<Map> map(String name) {
     switch (name) {
       case "Container":
-        return const HtContainer();
+        return [
+          {'title': '用于显示一个指定宽高的区域', 'filename': 'container', 'widget': const HtContainer()},
+          {'title': '用于显示一个指定颜色的区域', 'filename': 'container2', 'widget': const HtContainer2()},
+        ];
       case "Image":
-        return const HtImage();
+        return [
+          {'title': '显示一个网络图片', 'filename': 'image', 'widget': const HtImage()},
+        ];
       default:
-        return const Text('default');
+        return [
+          {'title': '默认文本', 'widget': const Text('default')},
+        ];
     }
   }
 
   static Map widgetList = {
-    '无态': [
+    'StatelessWidget': [
       {
         'widgetName': 'Container',
         'localName': '容器组件',
         'widgetIntroduction': '用于容纳单个子组件的容器组件。集成了若干个单子组件的功能，如内外边距、形变、装饰、约束等...',
       }
     ],
-    '有态': [
+    'StatefulWidget': [
       {
         'widgetName': 'Image',
         'localName': '图片组件',
         'widgetIntroduction': '用于显示一张图片',
       }
     ],
-    '单渲': [],
-    '多渲': [],
-    '滑片': [],
-    '代理': [],
-    '其它': [],
+    'SingleChildRenderObjectWidget': [],
+    'MultiChildRenderObjectWidget': [],
+    'SliverWidget': [],
+    'ProxyWidget': [],
+    'OtherWidget': [],
   };
 }
 

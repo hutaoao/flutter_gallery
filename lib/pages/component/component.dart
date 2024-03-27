@@ -13,6 +13,15 @@ class ComponentWidget extends StatefulWidget {
 
 class _ComponentWidgetState extends State<ComponentWidget> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  static Map pathMap = {
+    'StatelessWidget': '无态',
+    'StatefulWidget': '有态',
+    'SingleChildRenderObjectWidget': '单渲',
+    'MultiChildRenderObjectWidget': '多渲',
+    'SliverWidget': '滑片',
+    'ProxyWidget': '代理',
+    'OtherWidget': '其它',
+  };
 
   @override
   void initState() {
@@ -25,8 +34,8 @@ class _ComponentWidgetState extends State<ComponentWidget> with SingleTickerProv
     print(v);
   }
 
-  _goToDetail(values) {
-    final extraData = ComponentModel(localName: values['localName'], widgetName: values['widgetName']);
+  _goToDetail(key, values) {
+    final extraData = ComponentModel(catalogue: key, localName: values['localName'], widgetName: values['widgetName']);
     context.go('/widget-detail', extra: extraData);
   }
 
@@ -35,7 +44,7 @@ class _ComponentWidgetState extends State<ComponentWidget> with SingleTickerProv
     List<Widget> tabBarTabsList = [];
 
     WidgetsMap.widgetList.forEach((key, value) {
-      var tabBarTabsItem = Tab(child: Text(key));
+      var tabBarTabsItem = Tab(child: Text(pathMap[key]));
       var tabBarViewItem = GridView.builder(
         itemCount: value.length, // 网格的总数
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 50),
@@ -53,7 +62,7 @@ class _ComponentWidgetState extends State<ComponentWidget> with SingleTickerProv
               border: Border.all(width: 1, color: Colors.black12)
             ),
             child: GestureDetector(
-              onTap: () => _goToDetail(value[index]),
+              onTap: () => _goToDetail(key, value[index]),
               child: GridTile(
                 header: Text(value[index]['widgetName'], style: const TextStyle(fontSize: 16, color: Colors.black)),
                 footer: Text(value[index]['localName'], style: const TextStyle(fontSize: 12, color: Colors.black45)),
