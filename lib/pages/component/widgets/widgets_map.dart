@@ -12,12 +12,12 @@ class WidgetsMap {
     switch (name) {
       case "Container":
         return [
-          {'title': '用于显示一个指定宽高的区域', 'filename': 'container', 'widget': const HtContainer()},
-          {'title': '用于显示一个指定颜色的区域', 'filename': 'container2', 'widget': const HtContainer2()},
+          {'title': '用于显示一个指定宽高的区域', 'widget': const HtContainer1()},
+          {'title': '用于显示一个指定颜色的区域', 'widget': const HtContainer2()},
         ];
       case "Image":
         return [
-          {'title': '显示一个网络图片', 'filename': 'image', 'widget': const HtImage()},
+          {'title': '显示一个网络图片', 'widget': const HtImage1()},
         ];
       default:
         return [

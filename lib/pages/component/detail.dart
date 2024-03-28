@@ -17,19 +17,18 @@ class ComponentDetail extends StatefulWidget {
 class _ComponentDetailState extends State<ComponentDetail> {
   List<Map> dataList = [];
 
-  Future<String> _readDartFile(String fileName) async {
-    String fileText = await rootBundle.loadString('lib/pages/component/widgets/${widget.extraData.catalogue}/$fileName.dart');
-    return fileText;
-  }
-
-  _showCode(int i, String fileName, bool v) async {
+  _showCode(int i, bool v) async {
+    // 判断是否已经存在过，不要做重复读取操作
     if (dataList[i]['content'] != '') {
       setState(() {
         dataList[i]['show'] = !dataList[i]['show'];
       });
       return;
     }
-    print('----');
+    String fileName = '${widget.extraData.widgetName}${i+1}';
+    print(fileName);
+    print(widget.extraData.catalogue);
+    // 读取文件转为字符串
     String fileText = await rootBundle.loadString('lib/pages/component/widgets/${widget.extraData.catalogue}/$fileName.dart');
     setState(() {
       dataList[i]['show'] = true;
@@ -37,6 +36,7 @@ class _ComponentDetailState extends State<ComponentDetail> {
     });
   }
 
+  // 遍历渲染子节点
   List<Widget> _renderChild() {
     List<Widget> list = [];
     List<Map> data = WidgetsMap.map(widget.extraData.widgetName);
@@ -49,7 +49,7 @@ class _ComponentDetailState extends State<ComponentDetail> {
           children: [
             ListTile(
               title: Text('⚡${data[index]['title']}'),
-              trailing: RotatableIcon(handleClick: (bool v) => _showCode(index, data[index]['filename'], v)),
+              trailing: RotatableIcon(handleClick: (bool v) => _showCode(index, v)),
             ),
             data[index]['widget'],
             Container(
@@ -144,7 +144,7 @@ class _RotatableIconState extends State<RotatableIcon> with SingleTickerProvider
       onTap: _rotateIcon,
       child: RotationTransition(
         turns: _controller,
-        child: const Icon(Icons.code),
+        child: const Icon(Icons.code, color: Colors.red),
       ),
     );
   }
