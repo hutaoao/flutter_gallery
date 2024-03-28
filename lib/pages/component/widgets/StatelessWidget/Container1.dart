@@ -6,7 +6,7 @@ class HtContainer1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
+      width: 200,
       height: 100,
       decoration: const BoxDecoration(color: Colors.red),
     );

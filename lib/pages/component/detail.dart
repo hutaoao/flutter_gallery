@@ -26,8 +26,6 @@ class _ComponentDetailState extends State<ComponentDetail> {
       return;
     }
     String fileName = '${widget.extraData.widgetName}${i+1}';
-    print(fileName);
-    print(widget.extraData.catalogue);
     // 读取文件转为字符串
     String fileText = await rootBundle.loadString('lib/pages/component/widgets/${widget.extraData.catalogue}/$fileName.dart');
     setState(() {
