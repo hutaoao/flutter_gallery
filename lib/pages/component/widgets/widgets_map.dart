@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'exp/other_unit.dart';
 import 'exp/proxy_unit.dart';
-import 'exp/render_object_unit.dart';
+import 'exp/multi_unit.dart';
+import 'exp/single_unit.dart';
 import 'exp/sliver_unit.dart';
 import 'exp/stateful_unit.dart';
 import 'exp/stateless_unit.dart';
@@ -38,6 +39,11 @@ class WidgetsMap {
         return [
           {'title': '显示一个网络图片', 'widget': const HtImage1()},
         ];
+      case "Stack":
+        return [
+          {'title': '基本使用', 'widget': const HtStack1()},
+          {'title': '结合Positioned使用', 'widget': const HtStack2()},
+        ];
       default:
         return [
           {'title': '默认文本', 'widget': const Text('default')},
@@ -71,7 +77,13 @@ class WidgetsMap {
       }
     ],
     'SingleChildRenderObjectWidget': [],
-    'MultiChildRenderObjectWidget': [],
+    'MultiChildRenderObjectWidget': [
+      {
+        'widgetName': 'Stack',
+        'localName': '堆叠组件',
+        'widgetIntroduction': '可容纳多个组件，以堆叠的方式摆放子组件，后者居上。',
+      }
+    ],
     'SliverWidget': [],
     'ProxyWidget': [],
     'OtherWidget': [],

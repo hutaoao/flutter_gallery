@@ -40,6 +40,12 @@ flutter:
     - assets/images/3.0x/image1.jpg
     - lib/pages/component/widgets/StatelessWidget/
     - lib/pages/component/widgets/StatefulWidget/
+    - lib/pages/component/widgets/SliverWidget/
+    - lib/pages/component/widgets/ProxyWidget/
+    - lib/pages/component/widgets/SliverWidget/
+    - lib/pages/component/widgets/OtherWidget/
+    - lib/pages/component/widgets/MultiChildRenderObjectWidget/
+    - lib/pages/component/widgets/SingleChildRenderObjectWidget/
 
 
   # 自体配置
