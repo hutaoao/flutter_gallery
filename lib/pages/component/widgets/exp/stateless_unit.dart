@@ -13,3 +13,6 @@ export '../StatelessWidget/ListView1.dart';
 export '../StatelessWidget/ListView2.dart';
 export '../StatelessWidget/ListView3.dart';
 export '../StatelessWidget/ListView4.dart';
+export '../StatelessWidget/GestureDetector1.dart';
+export '../StatelessWidget/GestureDetector2.dart';
+export '../StatelessWidget/GestureDetector3.dart';

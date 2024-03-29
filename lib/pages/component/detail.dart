@@ -83,7 +83,16 @@ class _ComponentDetailState extends State<ComponentDetail> {
 
   // 遍历渲染子节点
   List<Widget> _renderChild() {
-    List<Widget> list = [];
+    List<Widget> list = [
+      ListTile(
+        title: Text(widget.extraData.localName, style: const TextStyle(fontSize: 16)),
+        subtitle: Text(widget.extraData.widgetIntroduction, style: const TextStyle(fontSize: 12),),
+        trailing: SizedBox(
+          width: 100,
+          child: Image.asset('assets/images/image1.jpg', fit: BoxFit.cover),
+        ),
+      )
+    ];
     List<Map> data = WidgetsMap.map(widget.extraData.widgetName);
 
     for (int index = 0; index < data.length; index++) {

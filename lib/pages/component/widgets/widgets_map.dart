@@ -36,6 +36,12 @@ class WidgetsMap {
           {'title': 'ListView.builder构造', 'widget': HtListView3()},
           {'title': 'ListView.separated构造', 'widget': HtListView4()},
         ];
+      case "GestureDetector":
+        return [
+          {'title': '基本事件', 'widget': const HtGestureDetector1()},
+          {'title': '详细信息', 'widget': const HtGestureDetector2()},
+          {'title': 'Pan事件', 'widget': const HtGestureDetector3()},
+        ];
       case "Image":
         return [
           {'title': '显示一个网络图片', 'widget': const HtImage1()},
@@ -72,6 +78,11 @@ class WidgetsMap {
         'widgetName': 'ListView',
         'localName': '列表组件',
         'widgetIntroduction': '可容纳多个子组件，可以通过builder、separated、custom等构造器。',
+      },
+      {
+        'widgetName': 'GestureDetector',
+        'localName': '手势监听器',
+        'widgetIntroduction': '接受点击、长安、双击、按下、松开、移动等事件，并可以获取触点信息。',
       }
     ],
     'StatefulWidget': [

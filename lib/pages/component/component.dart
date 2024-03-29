@@ -31,11 +31,16 @@ class _ComponentWidgetState extends State<ComponentWidget> with SingleTickerProv
   }
 
   _handleTapTabBar(v) {
-    print(v);
+    // print(v);
   }
 
   _goToDetail(key, values) {
-    final extraData = ComponentModel(catalogue: key, localName: values['localName'], widgetName: values['widgetName']);
+    final extraData = ComponentModel(
+      catalogue: key,
+      localName: values['localName'],
+      widgetName: values['widgetName'],
+      widgetIntroduction: values['widgetIntroduction']
+    );
     context.go('/widget-detail', extra: extraData);
   }
 
