@@ -14,6 +14,9 @@ class WidgetsMap {
         return [
           {'title': '用于显示一个指定宽高的区域', 'widget': const HtContainer1()},
           {'title': '可以在区域内放一个子组件', 'widget': const HtContainer2()},
+          {'title': '装饰 - decoration', 'widget': const HtContainer3()},
+          {'title': '变换性 - transform', 'widget': const HtContainer4()},
+          {'title': '约束性 - constraints', 'widget': const HtContainer5()},
         ];
       case "Text":
         return [
