@@ -4,6 +4,7 @@ import 'package:flutter_gallery/models/component_model.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atelier-cave-light.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:share_plus/share_plus.dart';
 
 class ComponentDetail extends StatefulWidget {
   final ComponentModel extraData;
@@ -25,13 +26,59 @@ class _ComponentDetailState extends State<ComponentDetail> {
       });
       return;
     }
-    String fileName = '${widget.extraData.widgetName}${i+1}';
+    String fileName = '${widget.extraData.widgetName}${i + 1}';
     // 读取文件转为字符串
     String fileText = await rootBundle.loadString('lib/pages/component/widgets/${widget.extraData.catalogue}/$fileName.dart');
     setState(() {
       dataList[i]['show'] = true;
       dataList[i]['content'] = fileText;
     });
+  }
+
+  // code 区域
+  Widget _renderCode(int index) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: 15),
+      child: dataList[index]['show'] ? Stack(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: HighlightView(
+              // The original code to be highlighted
+              dataList[index]['content'],
+
+              // Specify language
+              // It is recommended to give it a value for performance
+              language: 'dart',
+
+              // Specify highlight theme
+              // All available themes are listed in `themes` folder
+              theme: atelierCaveLightTheme,
+
+              // Specify padding
+              padding: const EdgeInsets.all(16),
+
+              // Specify text style
+              textStyle: const TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ),
+          Positioned(
+            right: 20,
+            top: 10,
+            child: GestureDetector(
+              onTap: () {
+                Share.share('${dataList[index]['content']}');
+              },
+              child: const Icon(Icons.share, size: 18, color: Colors.green),
+            ),
+          )
+        ],
+      )
+          : const SizedBox(),
+    );
   }
 
   // 遍历渲染子节点
@@ -50,32 +97,7 @@ class _ComponentDetailState extends State<ComponentDetail> {
               trailing: RotatableIcon(handleClick: (bool v) => _showCode(index, v)),
             ),
             data[index]['widget'],
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.only(top: 15),
-              child: dataList[index]['show']
-                  ? HighlightView(
-                      // The original code to be highlighted
-                      dataList[index]['content'],
-
-                      // Specify language
-                      // It is recommended to give it a value for performance
-                      language: 'dart',
-
-                      // Specify highlight theme
-                      // All available themes are listed in `themes` folder
-                      theme: atelierCaveLightTheme,
-
-                      // Specify padding
-                      padding: const EdgeInsets.all(16),
-
-                      // Specify text style
-                      textStyle: const TextStyle(
-                        fontSize: 12,
-                      ),
-                    )
-                  : const SizedBox(),
-            )
+            _renderCode(index),
           ],
         ),
       ));
