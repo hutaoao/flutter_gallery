@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gallery/pages/component/widgets/SingleChildRenderObjectWidget/Align1.dart';
 
 import 'exp/other_unit.dart';
 import 'exp/proxy_unit.dart';
@@ -39,6 +40,10 @@ class WidgetsMap {
         return [
           {'title': '显示一个网络图片', 'widget': const HtImage1()},
         ];
+      case "Align":
+        return [
+          {'title': '基本使用', 'widget': const HtAlign1()},
+        ];
       case "Stack":
         return [
           {'title': '基本使用', 'widget': const HtStack1()},
@@ -76,7 +81,13 @@ class WidgetsMap {
         'widgetIntroduction': '用于显示一张图片',
       }
     ],
-    'SingleChildRenderObjectWidget': [],
+    'SingleChildRenderObjectWidget': [
+      {
+        'widgetName': 'Align',
+        'localName': '对齐组件',
+        'widgetIntroduction': '可容纳一个子组件，通过alignment让子组件 定位在父组件宽高的任何指定分率处。',
+      }
+    ],
     'MultiChildRenderObjectWidget': [
       {
         'widgetName': 'Stack',
