@@ -10,7 +10,7 @@ class HtText2 extends StatelessWidget {
       style: TextStyle(
         fontSize: 50,
         color: Colors.white,
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.black12,
         shadows: [
           Shadow(
             color: Colors.green,

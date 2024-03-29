@@ -21,7 +21,11 @@ class WidgetsMap {
       case "Text":
         return [
           {'title': '文字的基本样式', 'widget': const HtText1()},
-          {'title': '文字阴影', 'widget': const HtText2()},
+          {'title': '文字阴影 - shadows', 'widget': const HtText2()},
+          {'title': '文字阴影 - decoration', 'widget': const HtText3()},
+          {'title': '文字对齐方式 - textAlign', 'widget': const HtText4()},
+          {'title': '文字方向 textDirection / 最大行数 maxLines', 'widget': const HtText5()},
+          {'title': '是否包裹与越界效果', 'widget': const HtText6()},
         ];
       case "ListView":
         return [

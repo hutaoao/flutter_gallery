@@ -9,7 +9,7 @@ class HtText1 extends StatelessWidget {
       width: 200,
       height: 100,
       padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(color: Colors.grey),
+      decoration: const BoxDecoration(color: Colors.black12),
       child: const Text(
         'hello flutter',
         style: TextStyle(
