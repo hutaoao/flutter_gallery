@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gallery/pages/component/widgets/SingleChildRenderObjectWidget/Align1.dart';
 
 import 'exp/other_unit.dart';
 import 'exp/proxy_unit.dart';
@@ -42,6 +41,12 @@ class WidgetsMap {
           {'title': '详细信息', 'widget': const HtGestureDetector2()},
           {'title': 'Pan事件', 'widget': const HtGestureDetector3()},
         ];
+      case "GridView":
+        return [
+          {'title': 'GridView.count构造', 'widget': HtGridView1()},
+          {'title': 'GridView.extent构造', 'widget': HtGridView2()},
+          {'title': 'GridView.builder构造', 'widget': HtGridView3()},
+        ];
       case "Image":
         return [
           {'title': '显示一个网络图片', 'widget': const HtImage1()},
@@ -83,6 +88,11 @@ class WidgetsMap {
         'widgetName': 'GestureDetector',
         'localName': '手势监听器',
         'widgetIntroduction': '接受点击、长安、双击、按下、松开、移动等事件，并可以获取触点信息。',
+      },
+      {
+        'widgetName': 'GridView',
+        'localName': '网格组件',
+        'widgetIntroduction': '以网格的方式容乃多个组件，可以通过count、extent、custom、builder等构造。有内边距、是否方向、滑动控制器等属性。',
       }
     ],
     'StatefulWidget': [

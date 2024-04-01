@@ -1,1 +1,1 @@
-import '../SingleChildRenderObjectWidget/Align1.dart';
+export '../SingleChildRenderObjectWidget/Align1.dart';
