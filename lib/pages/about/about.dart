@@ -14,7 +14,7 @@ class _AboutWidgetState extends State<AboutWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
+      backgroundColor: const Color(0xf8f8f8f8),
       body: Column(
         children: [
           const UserAccountsDrawerHeader(
@@ -40,14 +40,14 @@ class _AboutWidgetState extends State<AboutWidget> {
                   trailing: Icon(Icons.keyboard_arrow_right_outlined, color: Colors.red),
                   tileColor: Colors.white,
                 ),
-                Divider(height: 1),
+                Divider(height: 1, color: Color(0xf8f8f8f8)),
                 ListTile(
                   title: Text('数据管理'),
                   leading: Icon(Icons.data_exploration),
                   trailing: Icon(Icons.keyboard_arrow_right_outlined, color: Colors.red),
                   tileColor: Colors.white,
                 ),
-                Divider(height: 1),
+                Divider(height: 1, color: Color(0xf8f8f8f8)),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: ListTile(
@@ -63,7 +63,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                   trailing: Icon(Icons.keyboard_arrow_right_outlined, color: Colors.red),
                   tileColor: Colors.white,
                 ),
-                Divider(height: 1),
+                Divider(height: 1, color: Color(0xf8f8f8f8)),
                 ListTile(
                   title: Text('关于应用'),
                   leading: Icon(Icons.sailing),
