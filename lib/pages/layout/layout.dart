@@ -3,7 +3,6 @@ import 'package:flutter_gallery/utils/font/alibaba_fount.dart';
 import '../home/home.dart';
 import '../about/about.dart';
 import '../component/component.dart';
-import '../publish/publish.dart';
 import '../yuque/yuque.dart';
 
 class LayoutWidget extends StatefulWidget {
@@ -21,10 +20,18 @@ class _LayoutWidgetState extends State<LayoutWidget> {
   final List _pages = [
     HomeWidget(),
     const YuQueWidget(),
-    const PublishWidget(),
     const ComponentWidget(),
     const AboutWidget(),
   ];
+
+  final Map<String, IconData> iconsMap = {
+    '首页': Icons.home,
+    '语雀': AliIcon.yuque,
+    '组件': Icons.widgets,
+    '我的': Icons.person,
+  };
+
+  List<String> get info => iconsMap.keys.toList();
 
   @override
   void initState() {
@@ -33,62 +40,78 @@ class _LayoutWidgetState extends State<LayoutWidget> {
     _currentIndex = widget.index;
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+  void _onPressedFloatingActionButton() {
+
   }
 
-  void _onPressedFloatingActionButton() {
-    setState(() {
-      _currentIndex = 2;
-    });
+  Widget _buildChild(int i) {
+    bool active = i == _currentIndex;
+    return Expanded(
+      flex: 1, /// 这里使用Expanded占据所有空间
+      child: GestureDetector(
+        onTap: () => setState(() => _currentIndex = i),
+        child: Container( /// 此处的Container不可少：目的是为了可点击区域大一些
+          color: Colors.transparent, /// 此处设置背景色为透明
+          child: Column(
+            children: [
+              Icon(
+                iconsMap[info[i]],
+                size: 24,
+                color: active ? Colors.red : Colors.white,
+              ),
+              Text(
+                info[i],
+                style: TextStyle(
+                  fontSize: 14,
+                  color: active ? Colors.red : Colors.white
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_currentIndex],
+    return SizedBox(
+      /// 获取当前屏幕的宽度
+      width: MediaQuery.of(context).size.width,
+      height: 180,
+      child: Scaffold(
+        body: _pages[_currentIndex],
 
-      /// 底部导航配置
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
-          BottomNavigationBarItem(icon: Icon(AliIcon.yuque), label: '语雀'),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: '留言'),
-          BottomNavigationBarItem(icon: Icon(Icons.widgets), label: '组件'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: '我的'),
-        ],
-
-        /// 顶部导航有四个及以上tab需要配置 否则部分会被隐藏
-        type: BottomNavigationBarType.fixed,
-        iconSize: 26,
-        currentIndex: _currentIndex,
-        selectedFontSize: 14,
-        unselectedFontSize: 12,
-        selectedItemColor: Colors.red,
-        unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
-      ),
-
-      /// 浮动按钮配置
-      floatingActionButton: Container(
-        width: 60,
-        height: 60,
-        margin: const EdgeInsets.only(top: 10),
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(33)),
-        child: ClipOval(
-          child: FloatingActionButton(
-            onPressed: _onPressedFloatingActionButton,
-            backgroundColor: _currentIndex == 2 ? Colors.red : Colors.amber[800],
-            child: const Icon(Icons.add, color: Colors.white, size: 26),
+        /// 底部导航配置
+        bottomNavigationBar: BottomAppBar(
+          elevation: 1,
+          notchMargin: 5,
+          shape: const CircularNotchedRectangle(),
+          color: Colors.lime,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: info.asMap().keys.map((i) => _buildChild(i)).toList()
+              ..insertAll(2, [const SizedBox(width: 80)]), /// 在索引为2的位置插入一个宽度为30的空盒子作为占位
           ),
-        )
-      ),
+        ),
 
-      /// 浮动按钮位置
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        /// 浮动按钮配置
+        floatingActionButton: Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(33)),
+            child: ClipOval(
+              child: FloatingActionButton(
+                onPressed: _onPressedFloatingActionButton,
+                backgroundColor: Colors.amber,
+                child: const Icon(Icons.message, color: Colors.white, size: 26),
+              ),
+            )
+        ),
+
+        /// 浮动按钮位置
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
     );
   }
 }
