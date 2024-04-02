@@ -35,6 +35,7 @@ flutter:
 
   # 图片配置
   assets:
+    - assets/images/logo.png
     - assets/images/image1.jpg
     - assets/images/2.0x/image1.jpg
     - assets/images/3.0x/image1.jpg
