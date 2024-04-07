@@ -58,7 +58,7 @@ class AppRouters {
 
       // 如果用户未登录，则需要登录
       final loggedIn = token != null;
-      final loggingIn = state.fullPath == '/login';
+      final loggingIn = state.fullPath == '/login' || state.fullPath == '/register';
       if (!loggedIn) return loggingIn ? null : '/login';
 
       // 如果用户已登录，但仍处于登录页面，则发送到首页

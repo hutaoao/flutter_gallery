@@ -6,6 +6,11 @@ class UserApi {
     return await Fetch.post('/apis/login', data: params);
   }
 
+  // 注册
+  static Future register(params) async{
+    return await Fetch.post('/apis/register', data: params);
+  }
+
   // 获取语雀仓库的文档列表
   static Future getYuQueDocs(params) async{
     return await Fetch.get('/apis/get-yuque-docs', data: params);

@@ -13,6 +13,7 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
+  bool _isLoading = false;
   final storage = Storage();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
@@ -24,7 +25,8 @@ class _LoginWidgetState extends State<LoginWidget> {
     super.initState();
   }
 
-  void _submitForm(BuildContext context) async {
+  // 登录操作
+  void _submitForm() async {
     final form = _formKey.currentState;
 
     if (form!.validate()) {
@@ -33,15 +35,34 @@ class _LoginWidgetState extends State<LoginWidget> {
       // 在这里添加登录逻辑，比如调用API
       // 如果登录成功，可以导航到另一个屏幕
       // 如果登录失败，可以显示一个错误消息
-
-      print('Username: ${_usernameController.text}, Password: ${_passwordController.text}');
+      setState(() {_isLoading = true;});
       var resp = await UserApi.login({"username": _usernameController.text, "password": _passwordController.text});
-      print(resp['data']);
       String token = resp['data']['token'];
       await storage.setStorage('token', token);
+      setState(() {_isLoading = false;});
       context.go('/');
     }
   }
+
+  void _goRegister() {
+    context.push('/register');
+  }
+
+  Widget _buildButtonContent() => _isLoading ?
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text('登录中', style: TextStyle(fontSize: 18)),
+        Container(
+          width: 24.0,
+          height: 24.0,
+          margin: const EdgeInsets.only(left: 10),
+          child: const CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          ),
+        )
+      ],
+    ) : const Text('登录', style: TextStyle(fontSize: 18));
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +98,31 @@ class _LoginWidgetState extends State<LoginWidget> {
                     return null;
                   },
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: _goRegister,
+                      child: const Text('没有账号？去注册')
+                    )
+                  ],
+                ),
                 Container(
                   width: 1.sw,
+                  height: 50,
                   margin: EdgeInsets.only(top: 30.w),
                   child: ElevatedButton(
-                    onPressed: () => _submitForm(context),
-                    child: const Text('Login'),
+                    onPressed: _isLoading ? null : _submitForm,
+                    style: ButtonStyle(
+                      backgroundColor: const MaterialStatePropertyAll(Colors.redAccent), // 背景颜色
+                      foregroundColor: const MaterialStatePropertyAll(Colors.white), // 文字/图标 颜色
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15), // 配置圆角 - 默认圆角
+                        )
+                      ),
+                    ),
+                    child: _buildButtonContent(),
                   ),
                 )
               ],
