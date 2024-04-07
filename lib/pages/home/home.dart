@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../utils/storage/storage.dart';
 import 'package:go_router/go_router.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 /// StatelessWidget 无状态组件
 class HomeWidget extends StatelessWidget {
@@ -71,6 +72,12 @@ class HomeWidget extends StatelessWidget {
     )).toList();
   }
 
+  final List<String> imgList = [
+    'assets/images/banner/img_1.png',
+    'assets/images/banner/img_2.png',
+    'assets/images/banner/img_3.png',
+    'assets/images/banner/img_4.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +116,16 @@ class HomeWidget extends StatelessWidget {
       ),
       body: Column(
         children: [
+          CarouselSlider(
+            options: CarouselOptions(
+              height: 200, /// 高度
+              viewportFraction: 1, /// 窗口显示比例，默认0.8，想要宽度铺满就选1
+              autoPlay: true, /// 自动轮播
+            ),
+            items: imgList.map((item) => Center(
+                child: Image.asset(item, fit: BoxFit.cover, width: 1.sw, height: 200)
+            )).toList(),
+          ),
           Container(
             width: 0.5.sw,
             height: 0.5.sw,
