@@ -17,6 +17,8 @@ import '../pages/yuque/detail.dart';
 import '../pages/component/detail.dart';
 import 'package:flutter_gallery/models/component_model.dart';
 
+import '../pages/leave_message/leave_message.dart';
+
 class AppRouters {
   static final GoRouter routers = GoRouter(
     initialLocation: RouterNames.init,
@@ -49,6 +51,34 @@ class AppRouters {
       GoRoute(
         path: RouterNames.register,
         builder: (context, state) => const RegisterWidget(),
+      ),
+      GoRoute(
+        path: RouterNames.leaveMessage,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const LeaveMessage(),
+            transitionDuration: const Duration(milliseconds: 300),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              /// 平滑 - 有底部弹出
+              // return SlideTransition(
+              //   position: Tween<Offset>(
+              //     begin: const Offset(0, 1),
+              //     end: const Offset(0, 0),
+              //   ).animate(animation),
+              //   child: child,
+              // );
+              /// 缩放打开页面
+              return ScaleTransition(
+                scale: CurvedAnimation(parent: animation, curve: Curves.fastOutSlowIn),
+                child: child,
+              );
+            },
+          );
+        },
       ),
     ],
     /// 路由重定向

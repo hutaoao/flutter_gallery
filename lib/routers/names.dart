@@ -8,4 +8,5 @@
   static const yuQueDetail = 'yuque-detail/:slug';
   /// 组件详情页
   static const widgetDetail = 'widget-detail';
+  static const leaveMessage = '/leave-message';
  }

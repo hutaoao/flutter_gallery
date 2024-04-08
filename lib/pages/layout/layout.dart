@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gallery/utils/font/alibaba_fount.dart';
+import 'package:go_router/go_router.dart';
 import '../home/home.dart';
 import '../about/about.dart';
 import '../component/component.dart';
@@ -41,7 +42,7 @@ class _LayoutWidgetState extends State<LayoutWidget> {
   }
 
   void _onPressedFloatingActionButton() {
-
+    context.push('/leave-message');
   }
 
   Widget _buildChild(int i) {
