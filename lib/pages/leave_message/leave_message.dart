@@ -10,14 +10,38 @@ class LeaveMessage extends StatefulWidget {
   State<StatefulWidget> createState() => _LeaveMessageState();
 }
 
-class _LeaveMessageState extends State<LeaveMessage> {
+class _LeaveMessageState extends State<LeaveMessage> with SingleTickerProviderStateMixin {
   final TextEditingController _textEditingController = TextEditingController();
+  late AnimationController _ctrl;
+  late Animation<Offset> animation1;
+  late Animation<Offset> animation2;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400)
+    )..forward();
+
+    animation1 = Tween<Offset>(
+      begin: const Offset(0, 5),
+      end: Offset.zero
+    ).animate(_ctrl);
+
+    animation2 = Tween<Offset>(
+        begin: const Offset(0, -2),
+        end: Offset.zero
+    ).animate(_ctrl);
+  }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    super.dispose();
+    _ctrl.dispose();
     _textEditingController.dispose();
+    super.dispose();
   }
 
   void _onPressedFloatingActionButton() {
@@ -40,37 +64,43 @@ class _LeaveMessageState extends State<LeaveMessage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 300,
-              margin: const EdgeInsets.only(bottom: 30),
-              child: TextField(
-                minLines: 5,
-                maxLines: 8,
-                controller: _textEditingController,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: '留言...',
-                  border: OutlineInputBorder()
+            SlideTransition(
+              position: animation2,
+              child: Container(
+                width: 300,
+                margin: const EdgeInsets.only(bottom: 30),
+                child: TextField(
+                  minLines: 5,
+                  maxLines: 8,
+                  controller: _textEditingController,
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.all(10),
+                    hintText: '留言...',
+                    border: OutlineInputBorder()
+                  ),
                 ),
               ),
             ),
-            SizedBox(
-              width: 200,
-              height: 46,
-              child: ElevatedButton(
-                onPressed: _leaveMessage,
-                style: ButtonStyle(
-                  backgroundColor: const MaterialStatePropertyAll(Colors.redAccent), // 背景颜色
-                  foregroundColor: const MaterialStatePropertyAll(Colors.white), // 文字/图标 颜色
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15), // 配置圆角 - 默认圆角
-                    )
+            SlideTransition(
+              position: animation1,
+              child: SizedBox(
+                width: 200,
+                height: 46,
+                child: ElevatedButton(
+                  onPressed: _leaveMessage,
+                  style: ButtonStyle(
+                    backgroundColor: const MaterialStatePropertyAll(Colors.redAccent), // 背景颜色
+                    foregroundColor: const MaterialStatePropertyAll(Colors.white), // 文字/图标 颜色
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15), // 配置圆角 - 默认圆角
+                      )
+                    ),
                   ),
+                  child: const Text('留言', style: TextStyle(fontSize: 16)),
                 ),
-                child: const Text('留言', style: TextStyle(fontSize: 16)),
               ),
-            )
+            ),
           ],
         )
       ),
