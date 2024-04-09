@@ -60,6 +60,10 @@ class WidgetsMap {
         return [
           {'title': '基本使用', 'widget': const HtAnimatedPadding1()},
         ];
+      case "AnimatedOpacity":
+        return [
+          {'title': '基本使用', 'widget': const HtAnimatedOpacity1()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -119,6 +123,11 @@ class WidgetsMap {
         'widgetName': 'AnimatedPadding',
         'localName': '边距动画',
         'widgetIntroduction': '能让子组件进行Padding动画，可指定时长和曲线，有动画结束事件',
+      },
+      {
+        'widgetName': 'AnimatedOpacity',
+        'localName': '透明动画',
+        'widgetIntroduction': '能让子组件进行Opacity动画，可指定时长和曲线，有动画结束事件',
       }
     ],
     'SingleChildRenderObjectWidget': [
