@@ -81,6 +81,10 @@ class WidgetsMap {
         return [
           {'title': '基本使用', 'widget': const HtRotationTransition1()},
         ];
+      case "FadeTransition":
+        return [
+          {'title': '基本使用', 'widget': const HtFadeTransition1()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -165,6 +169,11 @@ class WidgetsMap {
         'widgetName': 'RotationTransition',
         'localName': '旋转变换',
         'widgetIntroduction': '可容纳一个子组件，并使其进行旋转动画，需要提供动画器turns，拥有alignment属性。',
+      },
+      {
+        'widgetName': 'FadeTransition',
+        'localName': '透明变换',
+        'widgetIntroduction': '可容纳一个子组件，并使其进行透明度渐变动画，需要提供动画器opacity。',
       }
     ],
     'SingleChildRenderObjectWidget': [
