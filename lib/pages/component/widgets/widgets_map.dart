@@ -77,6 +77,10 @@ class WidgetsMap {
           {'title': '基本使用', 'widget': const HtAnimatedSwitcher1()},
           {'title': '配合TransitionBuilder使用', 'widget': const HtAnimatedSwitcher2()},
         ];
+      case "RotationTransition":
+        return [
+          {'title': '基本使用', 'widget': const HtRotationTransition1()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -156,6 +160,11 @@ class WidgetsMap {
         'widgetName': 'AnimatedSwitcher',
         'localName': '切换动画',
         'widgetIntroduction': '当子组件变化时执行动画，需要指定子组件的key进行标识。动画方式可以自定义，能指定动画时长、动画曲线等属性。',
+      },
+      {
+        'widgetName': 'RotationTransition',
+        'localName': '旋转变换',
+        'widgetIntroduction': '可容纳一个子组件，并使其进行旋转动画，需要提供动画器turns，拥有alignment属性。',
       }
     ],
     'SingleChildRenderObjectWidget': [

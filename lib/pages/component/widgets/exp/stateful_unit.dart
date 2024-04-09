@@ -7,3 +7,4 @@ export '../StatefulWidget/AnimatedPositioned1.dart';
 export '../StatefulWidget/AnimatedDefaultTextStyle1.dart';
 export '../StatefulWidget/AnimatedSwitcher1.dart';
 export '../StatefulWidget/AnimatedSwitcher2.dart';
+export '../StatefulWidget/RotationTransition1.dart';
