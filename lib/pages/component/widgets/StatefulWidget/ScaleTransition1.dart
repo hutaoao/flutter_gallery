@@ -17,8 +17,6 @@ class _HtScaleTransition1State extends State<HtScaleTransition1> with SingleTick
     _controller = AnimationController(
       vsync: this, /// 让程序和手机的刷新频率一致
       duration: const Duration(milliseconds: 500),
-      lowerBound: 0.2,
-      upperBound: 1.5
     )..forward();
   }
 
@@ -56,7 +54,7 @@ class _HtScaleTransition1State extends State<HtScaleTransition1> with SingleTick
             ],
           ),
           ScaleTransition(
-            scale: _controller,
+            scale: _controller.drive(Tween(begin: 0.2, end: 1.5)),
             child: const Icon(Icons.radio, size: 60, color: Colors.red),
           )
         ],
