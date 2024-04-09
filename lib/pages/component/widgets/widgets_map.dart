@@ -56,6 +56,10 @@ class WidgetsMap {
           {'title': '基本使用', 'widget': const HtAnimatedContainer1()},
           {'title': '配合Stack使用', 'widget': const HtAnimatedContainer2()},
         ];
+      case "AnimatedPadding":
+        return [
+          {'title': '基本使用', 'widget': const HtAnimatedPadding1()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -110,6 +114,11 @@ class WidgetsMap {
         'widgetName': 'AnimatedContainer',
         'localName': '容器动画',
         'widgetIntroduction': '集合alignment、padding、color、decoration、width、height、constraints、margin、transform这个属性皆可动画，可指定时长和曲线，有动画结束事件',
+      },
+      {
+        'widgetName': 'AnimatedPadding',
+        'localName': '边距动画',
+        'widgetIntroduction': '能让子组件进行Padding动画，可指定时长和曲线，有动画结束事件',
       }
     ],
     'SingleChildRenderObjectWidget': [
