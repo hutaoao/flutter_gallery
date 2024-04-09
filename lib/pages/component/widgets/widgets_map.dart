@@ -51,6 +51,11 @@ class WidgetsMap {
         return [
           {'title': '显示一个网络图片', 'widget': const HtImage1()},
         ];
+      case "AnimatedContainer":
+        return [
+          {'title': '基本使用', 'widget': const HtAnimatedContainer1()},
+          {'title': '配合Stack使用', 'widget': const HtAnimatedContainer2()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -100,6 +105,11 @@ class WidgetsMap {
         'widgetName': 'Image',
         'localName': '图片组件',
         'widgetIntroduction': '用于显示一张图片',
+      },
+      {
+        'widgetName': 'AnimatedContainer',
+        'localName': '容器动画',
+        'widgetIntroduction': '集合alignment、padding、color、decoration、width、height、constraints、margin、transform这个属性皆可动画，可指定时长和曲线，有动画结束事件',
       }
     ],
     'SingleChildRenderObjectWidget': [
