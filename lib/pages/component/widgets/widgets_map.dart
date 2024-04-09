@@ -68,6 +68,10 @@ class WidgetsMap {
         return [
           {'title': '基本使用', 'widget': const HtAnimatedPositioned1()},
         ];
+      case "AnimatedDefaultTextStyle":
+        return [
+          {'title': '基本使用', 'widget': const HtAnimatedDefaultTextStyle1()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -137,6 +141,11 @@ class WidgetsMap {
         'widgetName': 'AnimatedPositioned',
         'localName': '定位动画',
         'widgetIntroduction': '能让子组件进行Positioned动画，可指定时长和曲线，有动画结束事件。只能用于Stack中',
+      },
+      {
+        'widgetName': 'AnimatedDefaultTextStyle',
+        'localName': '容器动画',
+        'widgetIntroduction': '能让子文字组件进行TextStyle动画，可指定时长和曲线，有动画结束事件。',
       }
     ],
     'SingleChildRenderObjectWidget': [
