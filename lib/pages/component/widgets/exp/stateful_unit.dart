@@ -10,3 +10,4 @@ export '../StatefulWidget/AnimatedSwitcher2.dart';
 export '../StatefulWidget/RotationTransition1.dart';
 export '../StatefulWidget/FadeTransition1.dart';
 export '../StatefulWidget/ScaleTransition1.dart';
+export '../StatefulWidget/SlideTransition1.dart';

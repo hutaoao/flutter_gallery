@@ -89,6 +89,10 @@ class WidgetsMap {
         return [
           {'title': '基本使用', 'widget': const HtScaleTransition1()},
         ];
+      case "SlideTransition":
+        return [
+          {'title': '基本使用', 'widget': const HtSlideTransition1()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -183,6 +187,11 @@ class WidgetsMap {
         'widgetName': 'ScaleTransition',
         'localName': '缩放变换',
         'widgetIntroduction': '可容纳一个子组件，并使其进行缩放动画，需要提供动画器scale，拥有alignment属性。',
+      },
+      {
+        'widgetName': 'SlideTransition',
+        'localName': '滑动变换',
+        'widgetIntroduction': 'AnimateWidget的子类，使用Offset类型的动画器让子组件在两个Offset对象之间进行过渡动画。',
       }
     ],
     'SingleChildRenderObjectWidget': [
