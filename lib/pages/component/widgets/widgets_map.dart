@@ -64,6 +64,10 @@ class WidgetsMap {
         return [
           {'title': '基本使用', 'widget': const HtAnimatedOpacity1()},
         ];
+      case "AnimatedPositioned":
+        return [
+          {'title': '基本使用', 'widget': const HtAnimatedPositioned1()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -128,6 +132,11 @@ class WidgetsMap {
         'widgetName': 'AnimatedOpacity',
         'localName': '透明动画',
         'widgetIntroduction': '能让子组件进行Opacity动画，可指定时长和曲线，有动画结束事件',
+      },
+      {
+        'widgetName': 'AnimatedPositioned',
+        'localName': '定位动画',
+        'widgetIntroduction': '能让子组件进行Positioned动画，可指定时长和曲线，有动画结束事件。只能用于Stack中',
       }
     ],
     'SingleChildRenderObjectWidget': [
