@@ -69,7 +69,7 @@ class _ComponentWidgetState extends State<ComponentWidget> with SingleTickerProv
             child: GestureDetector(
               onTap: () => _goToDetail(key, value[index]),
               child: GridTile(
-                header: Text(value[index]['widgetName'], style: const TextStyle(fontSize: 16, color: Colors.black)),
+                header: Text(value[index]['widgetName'], style: const TextStyle(fontSize: 16, color: Colors.black), overflow: TextOverflow.ellipsis),
                 footer: Text(value[index]['localName'], style: const TextStyle(fontSize: 12, color: Colors.black45)),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 30),

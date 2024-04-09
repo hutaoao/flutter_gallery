@@ -72,6 +72,11 @@ class WidgetsMap {
         return [
           {'title': '基本使用', 'widget': const HtAnimatedDefaultTextStyle1()},
         ];
+      case "AnimatedSwitcher":
+        return [
+          {'title': '基本使用', 'widget': const HtAnimatedSwitcher1()},
+          {'title': '配合TransitionBuilder使用', 'widget': const HtAnimatedSwitcher2()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -146,6 +151,11 @@ class WidgetsMap {
         'widgetName': 'AnimatedDefaultTextStyle',
         'localName': '容器动画',
         'widgetIntroduction': '能让子文字组件进行TextStyle动画，可指定时长和曲线，有动画结束事件。',
+      },
+      {
+        'widgetName': 'AnimatedSwitcher',
+        'localName': '切换动画',
+        'widgetIntroduction': '当子组件变化时执行动画，需要指定子组件的key进行标识。动画方式可以自定义，能指定动画时长、动画曲线等属性。',
       }
     ],
     'SingleChildRenderObjectWidget': [
