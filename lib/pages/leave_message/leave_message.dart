@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gallery/apis/user.dart';
@@ -10,11 +13,12 @@ class LeaveMessage extends StatefulWidget {
   State<StatefulWidget> createState() => _LeaveMessageState();
 }
 
-class _LeaveMessageState extends State<LeaveMessage> with SingleTickerProviderStateMixin {
+class _LeaveMessageState extends State<LeaveMessage> with TickerProviderStateMixin {
   final TextEditingController _textEditingController = TextEditingController();
   late AnimationController _ctrl;
   late Animation<Offset> animation1;
   late Animation<Offset> animation2;
+  late Animation<double> _rotationAnimation;
 
   @override
   void initState() {
@@ -24,6 +28,8 @@ class _LeaveMessageState extends State<LeaveMessage> with SingleTickerProviderSt
       vsync: this,
       duration: const Duration(milliseconds: 400)
     )..forward();
+
+    _rotationAnimation = Tween<double>(begin: 0.0, end: 1 / 4).animate(_ctrl);
 
     animation1 = Tween<Offset>(
       begin: const Offset(0, 5),
@@ -45,7 +51,10 @@ class _LeaveMessageState extends State<LeaveMessage> with SingleTickerProviderSt
   }
 
   void _onPressedFloatingActionButton() {
-    context.pop();
+    _ctrl.reverse();
+    Timer(const Duration(milliseconds: 300), () {
+      context.pop();
+    });
   }
 
   void _leaveMessage() async {
@@ -113,7 +122,13 @@ class _LeaveMessageState extends State<LeaveMessage> with SingleTickerProviderSt
             child: FloatingActionButton(
               onPressed: _onPressedFloatingActionButton,
               backgroundColor: Colors.amber,
-              child: const Icon(Icons.close, color: Colors.white, size: 26),
+              child: RotationTransition(
+                turns: CurvedAnimation(
+                  parent: _rotationAnimation,
+                  curve: Curves.linear
+                ),
+                child: const Icon(Icons.close, color: Colors.white, size: 26),
+              ),
             ),
           )
       ),
