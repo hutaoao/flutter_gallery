@@ -93,6 +93,11 @@ class WidgetsMap {
         return [
           {'title': '基本使用', 'widget': const HtSlideTransition1()},
         ];
+      case "AnimatedIcon":
+        return [
+          {'title': '基本使用', 'widget': const HtAnimatedIcon1()},
+          {'title': '交错式动画', 'widget': const HtAnimatedIcon2()},
+        ];
       case "Align":
         return [
           {'title': '基本使用', 'widget': const HtAlign1()},
@@ -192,6 +197,11 @@ class WidgetsMap {
         'widgetName': 'SlideTransition',
         'localName': '滑动变换',
         'widgetIntroduction': 'AnimateWidget的子类，使用Offset类型的动画器让子组件在两个Offset对象之间进行过渡动画。',
+      },
+      {
+        'widgetName': 'AnimatedIcon',
+        'localName': '图标动画',
+        'widgetIntroduction': '使用AnimatedIcons的图标数据，可以根据一个动画控制器来使图标进行动画效果，可指定图标大小、颜色等。',
       }
     ],
     'SingleChildRenderObjectWidget': [
