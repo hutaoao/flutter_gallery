@@ -17,7 +17,7 @@ class _HtSlideTransition1State extends State<HtSlideTransition1> with SingleTick
     _controller = AnimationController(
       vsync: this, /// 让程序和手机的刷新频率一致
       duration: const Duration(milliseconds: 2000),
-    )..forward();
+    )..reverse();
   }
 
   @override
@@ -53,6 +53,7 @@ class _HtSlideTransition1State extends State<HtSlideTransition1> with SingleTick
               )
             ],
           ),
+          const Divider(height: 20),
           SlideTransition(
             /// 这里的Offset里面数字代表子元素的宽高倍数
             position: Tween(

@@ -11,5 +11,6 @@ export '../StatefulWidget/RotationTransition1.dart';
 export '../StatefulWidget/FadeTransition1.dart';
 export '../StatefulWidget/ScaleTransition1.dart';
 export '../StatefulWidget/SlideTransition1.dart';
+export '../StatefulWidget/SlideTransition2.dart';
 export '../StatefulWidget/AnimatedIcon1.dart';
 export '../StatefulWidget/AnimatedIcon2.dart';

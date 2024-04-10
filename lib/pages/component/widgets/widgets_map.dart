@@ -92,6 +92,7 @@ class WidgetsMap {
       case "SlideTransition":
         return [
           {'title': '基本使用', 'widget': const HtSlideTransition1()},
+          {'title': '交互式动画', 'widget': const HtSlideTransition2()},
         ];
       case "AnimatedIcon":
         return [
