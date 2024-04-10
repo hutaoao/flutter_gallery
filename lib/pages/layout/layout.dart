@@ -105,7 +105,7 @@ class _LayoutWidgetState extends State<LayoutWidget> {
               child: FloatingActionButton(
                 onPressed: _onPressedFloatingActionButton,
                 backgroundColor: Colors.amber,
-                child: const Icon(Icons.message, color: Colors.white, size: 26),
+                child: const Icon(Icons.add, color: Colors.white, size: 28),
               ),
             )
         ),
