@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gallery/provider/user_model.dart';
-import 'package:flutter_gallery/provider/theme_model.dart';
+import 'package:flutter_gallery/provider/test.dart';
+import 'package:flutter_gallery/provider/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../utils/storage/storage.dart';
-import 'package:go_router/go_router.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 /// StatelessWidget 无状态组件
@@ -130,23 +129,23 @@ class HomeWidget extends StatelessWidget {
             width: 0.5.sw,
             height: 0.5.sw,
             color: Colors.red,
-            child: Consumer2<ThemeModel, UserModel>(
-              builder: (_, themeModel, userModel, child) {
+            child: Consumer2<ThemeViewModel, TextViewModel>(
+              builder: (_, themeViewModel, textViewModel, child) {
                 return ElevatedButton(
                   onPressed: () {
                     // context.push('/login');
                     storage.removeStorage('token');
-                    themeModel.toggleTheme();
-                    userModel.add();
+                    themeViewModel.toggleTheme();
+                    textViewModel.add();
                   },
                   child: const Text('切换主题'),
                 );
               },
             )
           ),
-          Consumer<UserModel>(
-            builder: (_, userModel, child) {
-              return Text(userModel.counter.toString());
+          Consumer<TextViewModel>(
+            builder: (_, textViewModel, child) {
+              return Text(textViewModel.counter.toString());
             },
           )
         ],

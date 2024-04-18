@@ -1,2 +1,2 @@
-# 此目录为MVVM架构的 Model（数据层）
+# 此目录为MVVM架构的 ViewModel（控制层）
 

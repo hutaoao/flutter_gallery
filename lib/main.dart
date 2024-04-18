@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gallery/globals/globals.dart' as globals;
 
 import 'utils/http/http_using.dart';
-import 'provider/theme_model.dart';
-import 'provider/user_model.dart';
+import 'provider/theme.dart';
+import 'provider/test.dart';
 import 'provider/yuque.dart';
 
 /// 自带路由配置
@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
     // 填入设计稿中设备的屏幕尺寸,单位dpß
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
-        ChangeNotifierProvider<ThemeModel>(create: (_) => ThemeModel()),
+        ChangeNotifierProvider<TextViewModel>(create: (_) => TextViewModel()),
+        ChangeNotifierProvider<ThemeViewModel>(create: (_) => ThemeViewModel()),
         ChangeNotifierProvider<YuQueViewModel>(create: (_) => YuQueViewModel()),
       ],
       child: ScreenUtilInit(
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           /// 使用 Get 时：GetMaterialApp 替换为 MaterialApp
           return MaterialApp.router(
             theme: ThemeData(
-              brightness: Provider.of<ThemeModel>(context).isDarkMode ? Brightness.dark : Brightness.light,
+              brightness: Provider.of<ThemeViewModel>(context).isDarkMode ? Brightness.dark : Brightness.light,
               appBarTheme: const AppBarTheme(
                 /// 统一appBar标题-居中 - android/ios表现形式不一样
                 centerTitle: true,
