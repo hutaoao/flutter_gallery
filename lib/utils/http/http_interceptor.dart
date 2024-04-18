@@ -12,6 +12,7 @@ import 'package:flutter_gallery/widgets/my_snackbar/my_snackbar.dart';
 class DioInterceptors extends Interceptor {
   final storage = Storage();
   final GoRouter router = AppRouters.routers;
+  final whiteList = ['/apis/login', '/apis/register'];
 
   /// 请求拦截
   @override
@@ -19,6 +20,10 @@ class DioInterceptors extends Interceptor {
     // TODO: implement onRequest
     // 头部添加token
     final token = await storage.getStorage('token');
+    if (token == null && !whiteList.contains(options.path)) {
+      router.go('/login');
+      return;
+    }
     options.headers['Token'] = token;
 
     // 更多业务需求...

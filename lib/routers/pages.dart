@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_gallery/utils/storage/storage.dart';
 
 import 'names.dart';
@@ -82,21 +82,7 @@ class AppRouters {
       ),
     ],
     /// 路由重定向
-    redirect: (BuildContext context, GoRouterState state) async {
-      final storage = Storage();
-      final token = await storage.getStorage('token');
-
-      // 如果用户未登录，则需要登录
-      final loggedIn = token != null;
-      final loggingIn = state.fullPath == '/login' || state.fullPath == '/register';
-      if (!loggedIn) return loggingIn ? null : '/login';
-
-      // 如果用户已登录，但仍处于登录页面，则发送到首页
-      if (loggingIn) return '/';
-
-      // 不需要重定向
-      return null;
-    },
+    redirect: (BuildContext context, GoRouterState state) async => await redirection(context, state),
     /// 路由监听
     // 有些时候,我们需要知道当前路由,跳转前的路由,或者是监听这个路由栈的变化
     // 这时候,我们就需要有一个路由的监听
@@ -105,6 +91,23 @@ class AppRouters {
       GoRouterObserver()
     ]
   );
+}
+
+redirection(BuildContext context, GoRouterState state) async{
+  final storage = Storage();
+  final token = await storage.getStorage('token');
+  final GoRouter router = AppRouters.routers;
+
+  // 如果用户未登录，则需要登录
+  final loggedIn = token != null;
+  final loggingIn = state.fullPath == '/login' || state.fullPath == '/register';
+  if (!loggedIn) return loggingIn ? null : router.go('/login');
+
+  // 如果用户已登录，但仍处于登录页面，则发送到首页
+  if (loggingIn) return '/';
+
+  // 不需要重定向
+  return null;
 }
 
 class GoRouterObserver extends NavigatorObserver {
