@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gallery/apis/user.dart';
 import 'package:flutter_gallery/utils/storage/storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gallery/widgets/my_snackbar/my_snackbar.dart';
+import 'package:flutter_gallery/services/login_service.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 /// 登录
 class RegisterWidget extends StatefulWidget {
@@ -27,19 +28,22 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     super.initState();
   }
 
-  // 登录操作
+  // z注册操作
   void _submitForm() async {
     final form = _formKey.currentState;
 
     if (form!.validate()) {
-      // form.save();
-
-      // 在这里添加登录逻辑，比如调用API
-      // 如果登录成功，可以导航到另一个屏幕
-      // 如果登录失败，可以显示一个错误消息
+      var params = {
+        "username": _usernameController.text,
+        "password": _passwordController.text
+      };
       setState(() {_isLoading = true;});
-      var resp = await UserApi.register({"username": _usernameController.text, "password": _passwordController.text});
+      var resp = await LoginService.fetchRegister(params);
       setState(() {_isLoading = false;});
+      if (resp.code != 10000) {
+        Fluttertoast.showToast(msg: resp.msg, gravity: ToastGravity.CENTER);
+        return;
+      }
       MySnackbar.success(message: '注册成功，即将前往登录页');
       Timer(const Duration(seconds: 2), () {
         context.go('/login');

@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gallery/apis/user.dart';
-import 'package:flutter_gallery/widgets/my_snackbar/my_snackbar.dart';
+import 'package:flutter_gallery/services/other_service.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LeaveMessage extends StatefulWidget {
   const LeaveMessage({super.key});
@@ -58,12 +57,12 @@ class _LeaveMessageState extends State<LeaveMessage> with TickerProviderStateMix
   }
 
   void _leaveMessage() async {
-    var resp = await UserApi.leaveMessage({"message": _textEditingController.text});
-    if (resp['code'] == 10000) {
-      _textEditingController.text = '';
-      return MySnackbar.success(message: resp['msg']);
+    var resp = await OtherService.fetchLeaveMessage({"message": _textEditingController.text});
+    if (resp.code != 10000) {
+      Fluttertoast.showToast(msg: resp.msg, gravity: ToastGravity.CENTER);
+      return;
     }
-    MySnackbar.error(message: resp['msg']);
+    Fluttertoast.showToast(msg: resp.msg, gravity: ToastGravity.CENTER);
   }
 
   @override

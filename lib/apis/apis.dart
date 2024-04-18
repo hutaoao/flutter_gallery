@@ -13,5 +13,5 @@ class YuQueApi {
 
 class OtherApi {
   // 留言
-  static const String getYuQueDocs = '/apis/leave-message';
+  static const String leaveMessage = '/apis/leave-message';
 }

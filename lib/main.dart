@@ -7,6 +7,7 @@ import 'package:flutter_gallery/globals/globals.dart' as globals;
 import 'utils/http/http_using.dart';
 import 'provider/theme_model.dart';
 import 'provider/user_model.dart';
+import 'provider/yuque.dart';
 
 /// 自带路由配置
 // import './routers/routers_default.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
         ChangeNotifierProvider<ThemeModel>(create: (_) => ThemeModel()),
+        ChangeNotifierProvider<YuQueViewModel>(create: (_) => YuQueViewModel()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),

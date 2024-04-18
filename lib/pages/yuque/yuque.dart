@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gallery/apis/user.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_gallery/services/yuque_service.dart';
+import 'package:flutter_gallery/provider/yuque.dart';
 
 /// 语雀
 class YuQueWidget extends StatefulWidget {
@@ -12,7 +15,6 @@ class YuQueWidget extends StatefulWidget {
 
 class _YuQueWidgetState extends State<YuQueWidget> {
   late int _pageNum = 1;
-  late int _total = 1;
   late bool _isLoading = false;
   late List dataList = [];
   final ScrollController _scrollController = ScrollController();
@@ -36,16 +38,17 @@ class _YuQueWidgetState extends State<YuQueWidget> {
     Map params = {'current': _pageNum, 'pageSize': 10};
     try{
       _isLoading = true;
-      var resp = await UserApi.getYuQueDocs(params);
-      if (resp['code'] != 10000) {
+      var resp = await YuQueService.fetchGetYuQueDocs(context, params: params);
+      _isLoading = false;
+      if (resp.code != 10000) {
+        Fluttertoast.showToast(msg: resp.msg, gravity: ToastGravity.CENTER);
         return [];
       }
-      _isLoading = false;
-      _total = resp['data']['total'];
-      dataList.addAll(resp['data']['list']);
-      return dataList;
+      /// fix：Don't use 'BuildContext's across async gaps
+      if (!mounted) return;
+      /// final dataList = Provider.of<YuQueViewModel>(context, listen: false).dataList;
+      return context.read<YuQueViewModel>().dataList;
     }catch(err) {
-      print(err);
       return [];
     }
   }
@@ -102,6 +105,9 @@ class _YuQueWidgetState extends State<YuQueWidget> {
 
   @override
   Widget build(BuildContext context) {
+    /// 重要
+    final total = context.select((YuQueViewModel yuQueViewModel) => yuQueViewModel.total);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('我的语雀'),
@@ -125,7 +131,7 @@ class _YuQueWidgetState extends State<YuQueWidget> {
               /// 列表项构造器
               itemBuilder: (BuildContext context, int index) {
                 /// 全部加载完
-                if (snapshot.data.length == _total) {
+                if (snapshot.data.length == total) {
                   return renderFinish();
                 } else {
                   /// 加载到最后一项显示loading
@@ -134,15 +140,15 @@ class _YuQueWidgetState extends State<YuQueWidget> {
                   }
                 }
                 return ListTile(
-                  title: Text('${snapshot.data[index]['title']}', overflow: TextOverflow.ellipsis),
-                  subtitle: Text('${snapshot.data[index]['published_at']}'),
+                  title: Text('${snapshot.data[index].title}', overflow: TextOverflow.ellipsis),
+                  subtitle: Text('${snapshot.data[index].publishedAt}'),
                   trailing: Image.network(
                     'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
                     height: 50,
                     fit: BoxFit.cover,
                   ),
                   onTap: () {
-                    context.push('/yuque-detail/${snapshot.data[index]['slug']}');
+                    context.push('/yuque-detail/${snapshot.data[index].slug}');
                   },
                 );
               },
