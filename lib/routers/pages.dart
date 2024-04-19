@@ -18,6 +18,8 @@ import '../pages/component/detail.dart';
 import 'package:flutter_gallery/models/component_model.dart';
 
 import '../pages/leave_message/leave_message.dart';
+import '../pages/my/app_settings/app_setting.dart';
+import '../pages/my/app_settings/dark_mode.dart';
 
 class AppRouters {
   static final GoRouter routers = GoRouter(
@@ -37,10 +39,19 @@ class AppRouters {
           GoRoute(
             path: RouterNames.widgetDetail,
             builder: (context, GoRouterState state) {
-              print(state.extra);
               final extraData = state.extra as ComponentModel;
               return ComponentDetail(extraData: extraData);
             },
+          ),
+          GoRoute(
+            path: RouterNames.appSettings,
+            builder: (context, GoRouterState state) => const AppSettingsWidget(),
+            routes: <RouteBase>[
+              GoRoute(
+                path: RouterNames.darkMode,
+                builder: (context, GoRouterState state) => const DarkModeWidget(),
+              )
+            ]
           )
         ],
       ),

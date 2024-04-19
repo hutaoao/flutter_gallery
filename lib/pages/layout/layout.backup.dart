@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gallery/utils/font/alibaba_fount.dart';
 import '../home/home.dart';
-import '../about/about.dart';
+import '../my/my.dart';
 import '../component/component.dart';
 import '../publish/publish.dart';
 import '../yuque/yuque.dart';
@@ -23,7 +23,7 @@ class _LayoutWidgetState extends State<LayoutWidget> {
     const YuQueWidget(),
     const PublishWidget(),
     const ComponentWidget(),
-    const AboutWidget(),
+    const MyWidget(),
   ];
 
   @override

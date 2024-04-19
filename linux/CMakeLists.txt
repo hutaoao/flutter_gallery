@@ -36,7 +36,7 @@ endif()
 
 # Compilation settings that should be applied to most targets.
 #
-# Be cautious about adding new options here, as plugins use this function by
+# Be cautious my adding new options here, as plugins use this function by
 # default. In most cases, you should add new options to specific targets instead
 # of modifying this function.
 function(APPLY_STANDARD_SETTINGS TARGET)

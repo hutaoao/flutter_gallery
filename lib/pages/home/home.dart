@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gallery/provider/test.dart';
-import 'package:flutter_gallery/provider/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import '../../utils/storage/storage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -125,29 +122,6 @@ class HomeWidget extends StatelessWidget {
                 child: Image.asset(item, fit: BoxFit.cover, width: 1.sw, height: 200)
             )).toList(),
           ),
-          Container(
-            width: 0.5.sw,
-            height: 0.5.sw,
-            color: Colors.red,
-            child: Consumer2<ThemeViewModel, TextViewModel>(
-              builder: (_, themeViewModel, textViewModel, child) {
-                return ElevatedButton(
-                  onPressed: () {
-                    // context.push('/login');
-                    storage.removeStorage('token');
-                    themeViewModel.toggleTheme();
-                    textViewModel.add();
-                  },
-                  child: const Text('切换主题'),
-                );
-              },
-            )
-          ),
-          Consumer<TextViewModel>(
-            builder: (_, textViewModel, child) {
-              return Text(textViewModel.counter.toString());
-            },
-          )
         ],
       ),
     );

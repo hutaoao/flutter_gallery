@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           /// 使用 Get 时：GetMaterialApp 替换为 MaterialApp
           return MaterialApp.router(
             theme: ThemeData(
-              brightness: Provider.of<ThemeViewModel>(context).isDarkMode ? Brightness.dark : Brightness.light,
+              brightness: Brightness.light,
               appBarTheme: const AppBarTheme(
                 /// 统一appBar标题-居中 - android/ios表现形式不一样
                 centerTitle: true,
@@ -59,7 +59,10 @@ class MyApp extends StatelessWidget {
               ),
               // textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
             ),
-
+            darkTheme: ThemeData(
+              brightness: Brightness.dark,
+            ),
+            themeMode: Provider.of<ThemeViewModel>(context).isDarkMode ? ThemeMode.dark : ThemeMode.light,
             /// 隐藏右上角的debug标签
             debugShowCheckedModeBanner: false,
 

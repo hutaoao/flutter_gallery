@@ -4,18 +4,17 @@ import 'package:flutter_gallery/utils/storage/storage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 关于我
-class AboutWidget extends StatefulWidget {
-  const AboutWidget({super.key});
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
 
   @override
-  State<StatefulWidget> createState() => _AboutWidgetState();
+  State<StatefulWidget> createState() => _MyWidgetState();
 }
 
-class _AboutWidgetState extends State<AboutWidget> {
+class _MyWidgetState extends State<MyWidget> {
   final storage = Storage();
 
   _logout() {
-    print('1111');
     storage.clear();
     context.go('/login');
   }
@@ -43,11 +42,12 @@ class _AboutWidgetState extends State<AboutWidget> {
             child: ListView(
               padding: const EdgeInsets.all(0),
               children: [
-                const ListTile(
-                  title: Text('应用管理'),
-                  leading: Icon(Icons.window),
-                  trailing: Icon(Icons.keyboard_arrow_right_outlined, color: Colors.red),
+                ListTile(
+                  title: const Text('应用管理'),
+                  leading: const Icon(Icons.window),
+                  trailing: const Icon(Icons.keyboard_arrow_right_outlined, color: Colors.red),
                   tileColor: Colors.white,
+                  onTap: () => context.push('/app-settings'),
                 ),
                 const Divider(height: 1, color: Color(0xf8f8f8f8)),
                 const ListTile(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gallery/utils/font/alibaba_fount.dart';
 import 'package:go_router/go_router.dart';
 import '../home/home.dart';
-import '../about/about.dart';
+import '../my/my.dart';
 import '../component/component.dart';
 import '../yuque/yuque.dart';
 
@@ -22,7 +22,7 @@ class _LayoutWidgetState extends State<LayoutWidget> {
     HomeWidget(),
     const YuQueWidget(),
     const ComponentWidget(),
-    const AboutWidget(),
+    const MyWidget(),
   ];
 
   final Map<String, IconData> iconsMap = {
