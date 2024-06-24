@@ -141,7 +141,7 @@ class _YuQueWidgetState extends State<YuQueWidget> {
                 }
                 return ListTile(
                   title: Text('${snapshot.data[index].title}', overflow: TextOverflow.ellipsis),
-                  subtitle: Text('${snapshot.data[index].publishedAt}'),
+                  subtitle: Text('${snapshot.data[index].createdAt}'),
                   trailing: Image.network(
                     'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
                     height: 50,
